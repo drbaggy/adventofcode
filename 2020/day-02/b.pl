@@ -16,5 +16,12 @@ use AdventSupport qw(slurp_file init);
 init($ROOT_PATH);
 ## END OF BOILER PLATE;
 
-slurp_file( sub { 'DO SOMETHING' } );
+my $valid_passwords;
+
+slurp_file( sub {
+  my( $min,$max,$letter,$pw ) = $_[0]=~m{(\d+)-(\d+)\s+(\w):\s+(\w+)}mxs;
+  $valid_passwords++ if ( $letter eq substr $pw, $min-1, 1 ) ^ ( $letter eq substr $pw, $max-1, 1 );
+} );
+
+say $valid_passwords;
 
