@@ -8,6 +8,7 @@ use File::Basename qw(dirname);
 use English qw(-no_match_vars $PROGRAM_NAME);
 use Cwd qw(abs_path);
 use Data::Dumper qw(Dumper);
+use Test::More;
 
 my $ROOT_PATH;
 BEGIN { $ROOT_PATH = dirname(abs_path($PROGRAM_NAME)); }
@@ -16,12 +17,20 @@ use AdventSupport qw(slurp_file init);
 init($ROOT_PATH);
 ## END OF BOILER PLATE;
 
-my $valid_passwords;
+is( solution('test.txt'), 1 );
+done_testing();
 
-slurp_file( sub {
-  my( $min,$max,$letter,$pw ) = $_[0]=~m{(\d+)-(\d+)\s+(\w):\s+(\w+)}mxs;
-  $valid_passwords++ if ( $letter eq substr $pw, $min-1, 1 ) ^ ( $letter eq substr $pw, $max-1, 1 );
-} );
+say solution();
 
-say $valid_passwords;
+sub solution {
+  my $file_name = shift;
+  my $valid_passwords;
+
+  slurp_file( sub {
+    my( $min,$max,$letter,$pw ) = $_[0]=~m{(\d+)-(\d+)\s+(\w):\s+(\w+)}mxs;
+    $valid_passwords++ if ( $letter eq substr $pw, $min-1, 1 ) ^ ( $letter eq substr $pw, $max-1, 1 );
+  }, $file_name );
+
+  return $valid_passwords;
+}
 

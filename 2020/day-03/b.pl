@@ -17,7 +17,7 @@ use AdventSupport qw(slurp_file init);
 init($ROOT_PATH);
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 336);
+is( solution('test.txt'), 336 );
 done_testing();
 
 say solution();
@@ -40,7 +40,7 @@ sub solution {
 
     ## Loop through each of the rows - jumping right if it is the row to do so - and looking for a tree!
     $_->{'count'} += q(#) eq substr $_[0], ( $_->{'pos'} += $_->{'jump_r'} ) % $ROW_LENGTH, 1
-      foreach grep { ! (++$_->{'row'} % $_->{'jump_d'}) } @moves;
+      foreach grep { ! ( ++$_->{'row'} % $_->{'jump_d'} ) } @moves;
   }, $file_name );
 
   ## Just get the product
