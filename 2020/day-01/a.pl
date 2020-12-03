@@ -8,14 +8,30 @@ use File::Basename qw(dirname);
 use English qw(-no_match_vars $PROGRAM_NAME);
 use Cwd qw(abs_path);
 use Data::Dumper qw(Dumper);
+use Test::More;
+use Const::Fast qw(const);
 
 my $ROOT_PATH;
-BEGIN { $ROOT_PATH = dirname(abs_path($PROGRAM_NAME)); }
-use lib dirname( dirname( $ROOT_PATH ) );
-use AdventSupport qw(slurp_file init);
-init($ROOT_PATH);
+BEGIN { $ROOT_PATH = dirname(dirname(dirname(abs_path($PROGRAM_NAME)))); }
+use lib $ROOT_PATH;
+use AdventSupport;
+
 ## END OF BOILER PLATE;
 
-my %seen; slurp_file( sub { $seen{1*$_}=1; }, 'in.txt' );
+const my $TOTAL => 2020;
+const my $MAX   => $TOTAL/2;
 
-say "@{[ $_, 2020-$_, $_ * (2020-$_) ]}" foreach grep { $_ < 1011 && exists $seen{2020-$_} } keys %seen;
+is( solution( 'test.txt' ), 514579 );
+done_testing();
+
+say solution();
+
+sub solution {
+  my $filename = shift;
+  my %seen;
+  slurp_file( sub { $seen{ $_[0] } = 1; }, $filename );
+
+  foreach ( keys %seen ) {
+    return $_ * ( $TOTAL - $_ ) if $_ <= $MAX && exists $seen{ $TOTAL - $_ };
+  }
+}
