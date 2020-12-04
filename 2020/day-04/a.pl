@@ -18,18 +18,26 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 2 );
 done_testing();
 
-say solution();
+say solution(undef);
 
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my %keys;
+  my $count=0;
   slurp_file( sub {
+    if($_[0] =~ m{\S}) {
+      $keys{$_}++ foreach grep { $_ ne 'cid' } split m{:\S+\s*}, $_[0];
+    } else {
+      $count++ if "@{[ sort keys %keys]}" eq 'byr ecl eyr hcl hgt iyr pid';
+      %keys =();
+    }
     # Code to process each line of input
-  }, $file_name );
+  }, $file_name, 1 );
   ## Now the work horse bit
-  return 'result';
+  return $count;
 }
 
