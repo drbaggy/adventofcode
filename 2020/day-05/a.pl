@@ -18,7 +18,7 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 820 );
 done_testing();
 
 say solution();
@@ -26,10 +26,12 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $max = 0;
   slurp_file( sub {
-    # Code to process each line of input
+    my $v = unpack 'n', pack 'B16', '000000'.$_[0] =~ tr/BRFL/1100/r;
+    $max = $v if $max < $v;
   }, $file_name );
   ## Now the work horse bit
-  return 'result';
+  return $max;
 }
 
