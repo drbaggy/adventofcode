@@ -39,6 +39,5 @@ sub solution {
   ## The value is the position of the "1" in the seat before our seat so we have to add a "1"
   ## to the result...
   return 1+index $seats, '101';
-  ## Now the work horse bit
 }
 
