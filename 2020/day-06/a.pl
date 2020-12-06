@@ -18,7 +18,7 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 11);
 done_testing();
 
 say solution();
@@ -26,10 +26,18 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my %qs;
+  my $res;
   slurp_file( sub {
+    if($_[0] =~ m{\w}) {
+      $qs{$_}++ foreach split m{}, $_[0];
+    } else {
+      $res += keys %qs;
+      %qs=();
+    }
     # Code to process each line of input
-  }, $file_name );
+  }, $file_name, 1 );
   ## Now the work horse bit
-  return 'result';
+  return $res;
 }
 

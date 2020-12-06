@@ -18,7 +18,7 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 6);
 done_testing();
 
 say solution();
@@ -26,10 +26,30 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $res = 0;
+  my %qs;
+  my $count=0;
+
+  ## We need to make this an "all" calculation...
+  ## So we continue to "count" each answer, but also
+  ## count the number of people.
+  ## The number of alls is those letters for which
+  ## the count of the letter equals the count of the
+  ## person...
+
   slurp_file( sub {
+    if($_[0] =~ m{\w}) {
+      $qs{$_}++ foreach split m{}, $_[0];
+      $count++;
+    } else {
+      $res += grep { $_ == $count } values %qs;
+      $count=0;
+      %qs=();
+    }
     # Code to process each line of input
-  }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  }, $file_name, 1 ); ## 1 <- add a blank line so we process the last group..
+
+  ## Just return the result
+  return $res;
 }
 
