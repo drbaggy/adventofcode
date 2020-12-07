@@ -18,7 +18,7 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 4 );
 done_testing();
 
 say solution();
@@ -26,10 +26,24 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $mapping = {};
+  my $rev_map = {};
   slurp_file( sub {
-    # Code to process each line of input
+    my( $col, $pt2 ) = split m{ bags contain }, $_[0];
+    $rev_map->{$_}{$col}++ foreach $pt2 =~ m{\d+ (.*?) bags?}g ;
   }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  my @queue;
+  my %bag_colours;
+  my $colour = 'shiny gold';
+  while($colour) {
+    my @contained = keys %{$rev_map->{$colour}||{}};
+    foreach (@contained){
+      next if exists $bag_colours{$_};
+      $bag_colours{$_}=1;
+      push @queue,$_;
+    }
+    $colour = shift @queue;
+  }
+  return scalar keys %bag_colours;
 }
 

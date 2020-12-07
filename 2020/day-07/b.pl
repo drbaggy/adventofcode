@@ -18,18 +18,29 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 32 );
+is( solution('test2.txt'), 126 );
 done_testing();
 
 say solution();
 
+sub count_bags_in_bag {
+  my( $colour, $mapping ) = @_;
+  my $sum = 1;
+  $sum += $mapping->{$colour}{$_} * count_bags_in_bag( $_, $mapping ) foreach keys %{$mapping->{$colour}};
+  return $sum;
+}
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $mapping = {};
+  my $rev_map = {};
   slurp_file( sub {
+    my( $col, $pt2 ) = split m{ bags contain }, $_[0];
+    my %colours = reverse $pt2 =~ m{(\d+) (.*?) bags?}g ;
+    $mapping->{$col} = \%colours;
     # Code to process each line of input
   }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  return count_bags_in_bag( 'shiny gold', $mapping ) - 1; ## This is an inclusive number so we remove 1 for the shiny gold bag!
 }
 
