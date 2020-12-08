@@ -16,9 +16,11 @@ BEGIN { $ROOT_PATH = dirname(dirname(dirname(abs_path($PROGRAM_NAME)))); }
 use lib $ROOT_PATH;
 
 use AdventSupport;
+use AOC2001;
+
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 8 );
 done_testing();
 
 say solution();
@@ -26,10 +28,24 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $comp = AOC2001->new();
   slurp_file( sub {
+    $comp->add( $_ );
     # Code to process each line of input
   }, $file_name );
   ## Now the work horse bit
-  return 'result';
+  foreach my $op_no ( 0 .. $comp->no_steps -1 ) {
+    $comp->reset;
+    if( $comp->op( $op_no ) eq 'nop' ) {
+      $comp->set_op( $op_no, 'jmp' );
+      $comp->step until $comp->finished || $comp->executed;
+      $comp->set_op( $op_no, 'nop' );
+    } elsif( $comp->op( $op_no ) eq 'jmp' ) {
+      $comp->set_op( $op_no, 'nop' );
+      $comp->step until $comp->finished || $comp->executed;
+      return $comp->acc if $comp->finished;
+    }
+  }
+  return 'Nothing finished';
 }
 
