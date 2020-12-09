@@ -6,9 +6,6 @@ use base qw(Exporter);
 use File::Basename qw(dirname);
 use English qw(-no_match_vars $PROGRAM_NAME $PERL_VERSION);
 use Cwd qw(abs_path);
-use Data::Dumper;
-use Test::More;
-use Const::Fast;
 
 our @EXPORT      = qw(slurp_file);
 our @EXPORT_OK   = @EXPORT;
@@ -24,7 +21,11 @@ sub slurp_file {
   open my $fh, q(<), $PROGRAM_PATH.q(/).$file or die "Filename $file doesn't exist\n";
   while(<$fh>) {
     chomp;
-    &{$fn}( $_ );
+    eval { &{$fn}( $_ ); };
+    next unless $@;
+    warn sprintf "Died with message: %s\n", $@ =~ s{\s+}{ }mxsg unless $@ =~ m{^Died at };
+    close $fh;
+    return;
   }
   close $fh;
   &{$fn}(q()) if $flag;
