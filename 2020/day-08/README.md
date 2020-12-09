@@ -96,4 +96,28 @@ Your puzzle answer was 2212.
 
 # Perl solution
 
-We need to create out own game console - I'll call it the AOC2001. Which we can then execute our scripts
+We need to create out own game console - I'll call it the AOC2001. Which we can then execute our scripts.
+
+As this will be used in multiple solutions we create an object - AOC2001.pm which encapsulates the operations.
+
+ * Loading in data:
+   * `add( line )` - parse the line and add the operator/value into the console at the next available location
+   * `reset` - reset the computer pointers/registers - and return the programme to it's initial state.
+   * `clear` - reset computer and wipe memory, 
+
+ * Running processess
+   * `finished`       - returns true if the pointer has reached the end of memory
+   * `next`           - move to the next location in memory 
+   * `current_action` - operator at current location
+   * `current_value`  - value at current location
+   * `executed`       - whether the current action has already been executed
+   * `step`           - run the action at the current memory location, executes `step_{operator}` method
+     * `step_nop` - move pointer forward one location
+     * `step_acc` - add value to acc and move forward one location
+     * `step_jmp` - move to new location
+   * `acc`            - get the value of the accumulator
+
+ * For debugging purposes
+   * `set_op($location,$action)` - change the operator at specified location 
+   * `op($location)` - get operator at given location
+   * `no_steps` - the size of memory
