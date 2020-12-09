@@ -95,6 +95,15 @@ sub reset {
   return;
 }
 
+sub clear {
+  my $self = shift;
+  $self->{'ptr'} =0;
+  $self->{'acc'} =0;
+  $slef->{'mem'} = [];
+  return;
+}
+
+
 sub op {
   my($self,$op_no) = @_;
   return $self->{'mem'}[$op_no]{'action'};
