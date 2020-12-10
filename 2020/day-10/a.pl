@@ -17,12 +17,14 @@ use lib $ROOT_PATH;
 
 use AdventSupport;
 ## END OF BOILER PLATE;
+start_timer();
 
-is( solution('test.txt'), 35 );
-is( solution('test2.txt'), 220 );
-done_testing();
+#is( solution('test.txt'), 35 );
+#is( solution('test2.txt'), 220 );
+#done_testing();
 
 say solution();
+say duration();
 
 sub solution {
   my $file_name = shift;
