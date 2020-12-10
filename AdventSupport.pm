@@ -6,14 +6,25 @@ use base qw(Exporter);
 use File::Basename qw(dirname);
 use English qw(-no_match_vars $PROGRAM_NAME $PERL_VERSION);
 use Cwd qw(abs_path);
+use Time::HiRes qw(time);
 
-our @EXPORT      = qw(slurp_file);
+our @EXPORT      = qw(slurp_file start_timer duration);
 our @EXPORT_OK   = @EXPORT;
 our %EXPORT_TAGS = ('ALL' => \@EXPORT );
 
 my $PROGRAM_PATH;
 BEGIN { $PROGRAM_PATH = dirname(abs_path($PROGRAM_NAME)); }
 
+my $start_time;
+
+sub start_timer {
+  $start_time = time;
+  return;
+}
+
+sub duration {
+  return time - $start_time;
+}
 sub slurp_file {
   my($fn,$file,$flag) = @_;
   $file ||= 'in.txt';
