@@ -18,7 +18,8 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('test.txt'), 35 );
+is( solution('test2.txt'), 220 );
 done_testing();
 
 say solution();
@@ -26,10 +27,16 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
+  my $ad = 'x';
   slurp_file( sub {
+    $ad .= ' ' x ($_[0]-length $ad) if $_[0]>length $ad;
+    substr $ad,$_[0],1,'x';
     # Code to process each line of input
   }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  $ad.='  x';
+  my $threes   = @{[ $ad =~ m{(x  (?=x))}g ]};
+  #my $twos     = @{[ $ad =~ m{(x (?=x))}g ]};
+  my $ones     = @{[ $ad =~ m{(x(?=x))}g ]};
+  return $threes * $ones;
 }
 
