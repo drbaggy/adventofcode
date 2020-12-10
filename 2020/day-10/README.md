@@ -159,3 +159,42 @@ Your puzzle answer was 129586085429248.
 
 # Perl solution
 
+I wanted to avoid having any nasty sort loop code here. So we load the adaptor locations into a string `x`s and ` `s.
+
+## Problem 1
+
+The one gaps are where the string contains "`xx`" and the three gaps are where the string contains "`xxx`". We can find these with a regex. We need to use a +ve lookahead (?=x) so that the matches can overlap.
+
+## Problem 2
+
+We use the same trick to store the adaptors as `x`s. Now we need to work out the value - we can't count all - so we need to need a trick to make it simpler.
+
+We note that if the gap is 3 then there is only one way across between the two adaptors... Then we can split the block into sections.
+
+```
+    ,----.     ,----.
+---<------>---<------>----
+    `-<>-'     `-<>-'
+```
+
+To get the total number of combinations we just have to multiple the numbers of routes in each of the individual blocks.
+
+The first four cases are:
+
+```
+  x             1
+  xx            1
+  x x           1
+  xxx           2
+```
+
+Subsequent entries are calculated by summing the values for the sequence starting on any 'x's in the next three spaces e.g.
+
+```
+     count("xx xxxx")
+   = count("x xxxx" ) + count("xxxx")
+   = count("xxxx") + count("xxx") + count("xxx")+count("xx")+count("x")
+   = count("xxx") + count("xx" )+ count("x") + count("xx") + count("x") + 2
+   = count("xx" ) + count("x") + 6
+   = 8
+```

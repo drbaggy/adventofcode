@@ -16,13 +16,13 @@ BEGIN { $ROOT_PATH = dirname(dirname(dirname(abs_path($PROGRAM_NAME)))); }
 use lib $ROOT_PATH;
 use AdventSupport;
 
-my %part_cache = qw(x 1 xx 1);
+my %part_cache = (qw(x 1 xx 1 xxx 2),'x x' => 1);
 
 ## END OF BOILER PLATE;
 #printf "%5d %s\n", count_part($_), $_ foreach
 #exit;
 
-my %test_counts = (
+my %test_counts = ( 'xx xxxx' => 8 ,
    'x' => 1 , 'xx' => 1 , 'xxx' => 2 , 'xxxx' => 4 , 'xxxxx' => 7 , 'xxxxxx' => 13 , 'xxxxxxx' => 24 , 'xxxxxxxx' => 44,
    'x x' => 1 , 'x x x' => 1 , 'x x x x' => 1 , 'x x x x x' => 1 , 'x x x x x x' => 1 ,
    'x xx' => 2 , 'xx x' => 2 , 'xx xx' => 3 , 'x x xx' => 2 , 'x xx x' => 3 , 'x xx xx' => 5 , 'xx x x' => 2 , 'xx x xx' => 4 , 'xx xx x' => 5 , 'xx xx xx' => 8,
