@@ -191,10 +191,10 @@ The first four cases are:
 Subsequent entries are calculated by summing the values for the sequence starting on any 'x's in the next three spaces e.g.
 
 ```
-     count("xx xxxx")
-   = count("x xxxx" ) + count("xxxx")
-   = count("xxxx") + count("xxx") + count("xxx")+count("xx")+count("x")
-   = count("xxx") + count("xx" )+ count("x") + count("xx") + count("x") + 2
-   = count("xx" ) + count("x") + 6
-   = 8
+     count( "xx xxxx" ) = count( "x xxxx" ) + count( "xxxx" )                = 6 + 4     = 10
+     count( "x xxxx"  ) = count( "xxxx"   ) + count( "xxx"  )                = 4 + 2     = 6
+     count( "xxxx"    ) = count( "xxx"    ) + count( "xx"   ) + count( "x" ) = 2 + 1 + 1 = 4
+     count( "xxx"     ) = 2
+     count( "xx"      ) = 1
+     count( "x"       ) = 1
 ```
