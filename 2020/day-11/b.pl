@@ -59,16 +59,16 @@ sub solution {
   }
 
   ## Cache the location of the 8 chairs around this one....
-  while(1) {
-    foreach my $y (0..($h-1)) {
-      $loc_cache->[$y]=[];
-      foreach my $x (0..($w-1)) {
-        $loc_cache->[$y][$x]=[];
-        foreach my $a (-1..1) {
-          cache_loc($grid,$y,$x,$a,$_) foreach -1..1;
-        }
+  foreach my $y (0..($h-1)) {
+    $loc_cache->[$y]=[];
+    foreach my $x (0..($w-1)) {
+      $loc_cache->[$y][$x]=[];
+      foreach my $a (-1..1) {
+        cache_loc($grid,$y,$x,$a,$_) foreach -1..1;
       }
     }
+  }
+  while(1) {
     #Dumper( $loc_cache );
     my $new_grid = [ map {$_} @{$grid} ];
     foreach my $y (0..($h-1)) {

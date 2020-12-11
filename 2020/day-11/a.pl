@@ -28,6 +28,8 @@ say solution();
 
 my $h;
 my $w;
+my $loc_cache;
+
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
@@ -37,7 +39,20 @@ sub solution {
   }, $file_name );
 
   ## Get height and width of grid... helps with the loop
-  $h = @{$grid}; $w = length $grid->[0];
+  $h = @{$grid};
+  $w = length $grid->[0];
+
+  sub cache_loc {
+    my($g,$y0,$x0,$dx,$dy) = @_;
+    return unless $dx || $dy;
+    my $x = $x0+$dx;
+    my $y = $y0+$dy;
+    if( $y < 0 || $x < 0 || $y >= $h || $x >= $w ) {
+      return;
+    }
+    push @{ $loc_cache->[$y0][$x0] }, [$y,$x];
+    return;
+  }
 
   sub occ {
     my($g,$y,$x) = @_;
@@ -45,18 +60,24 @@ sub solution {
     return '#' eq substr $g->[$y], $x, 1;
   }
 
-  my $new_grid;
+  foreach my $y (0..($h-1)) {
+    $loc_cache->[$y]=[];
+    foreach my $x (0..($w-1)) {
+      $loc_cache->[$y][$x]=[];
+      foreach my $a (-1..1) {
+        cache_loc($grid,$y,$x,$a,$_) foreach -1..1;
+      }
+    }
+  }
   while(1) {
-    $new_grid = [ map {$_} @{$grid} ];
+    my $new_grid = [ map {$_} @{$grid} ];
     ## The only option here is to brute force
     foreach my $y (0..($h-1)) {
       foreach my $x (0..($w-1)) {
         my $s = substr $grid->[$y], $x, 1;
         next if q(.) eq $s; ## No chair die...
-        my $n = occ($grid,$y  ,$x+1)+occ($grid,$y  ,$x-1)
-              + occ($grid,$y+1,$x+1)+occ($grid,$y+1,$x-1)+occ($grid,$y+1,$x)
-              + occ($grid,$y-1,$x+1)+occ($grid,$y-1,$x-1)+occ($grid,$y-1,$x)
-              ;
+        my $n = 0;
+        $n += '#' eq substr $grid->[$_->[0]], $_->[1], 1 foreach @{$loc_cache->[$y][$x]};
         substr $new_grid->[$y],$x,1,'L' if $s eq '#' && $n >= 4;
         substr $new_grid->[$y],$x,1,'#' if $s eq 'L' && $n == 0;
       }
@@ -68,7 +89,7 @@ sub solution {
     last if "@{$new_grid}" eq "@{$grid}";
     $grid = $new_grid;
   }
-  my $count = 0; $count += tr/#/#/ foreach @{$new_grid};
+  my $count = 0; $count += tr/#/#/ foreach @{$grid};
   ## Now the work horse bit
   return $count;
 }
