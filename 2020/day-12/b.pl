@@ -17,6 +17,18 @@ use lib $ROOT_PATH;
 
 use AdventSupport;
 ## END OF BOILER PLATE;
+my ($x,$y,$dir,$wx,$wy);
+
+my %act = (
+  'L' => sub { ( $wx, $wy ) = $_[0] == 180 ? ( -$wx, -$wy ) : $_[0] == 270 ? ( $wy,  -$wx ) : ( -$wy,  $wx ) ; },
+  'R' => sub { ( $wx, $wy ) = $_[0] == 180 ? ( -$wx, -$wy ) : $_[0] ==  90 ? ( $wy,  -$wx ) : ( -$wy,  $wx ) ; },
+  'F' => sub { $x += $_[0]*$wx; $y += $_[0]*$wy; },
+  'E' => sub { $wx += $_[0]; },
+  'W' => sub { $wx -= $_[0]; },
+  'N' => sub { $wy += $_[0]; },
+  'S' => sub { $wy -= $_[0]; },
+);
+
 
 is( solution('test.txt'), 286 );
 done_testing();
@@ -26,26 +38,13 @@ say solution();
 sub solution {
   my $file_name = shift;
   # Initialize slurp variables
-  my ($x,$y,$dir,$wx,$wy) = (0,0,0,10,1);
+  ($x,$y,$dir,$wx,$wy) = (0,0,0,10,1);
 
   slurp_file( sub {
+    return unless $_[0];
     my( $c,$n ) = $_[0] =~ m{([NSEWLRF])(\d+)};
-    return unless $c;
     # Split into command and number
-    if( $c eq 'L' || $c eq 'R' ) { ## Rotate way point
-      $n = 360 - $n if $c eq 'L';
-      ( $wx, $wy ) = ( -$wx, -$wy ) if $n == 180;
-      ( $wx, $wy ) = ( $wy,  -$wx ) if $n ==  90;
-      ( $wx, $wy ) = ( -$wy,  $wx ) if $n == 270;
-    } elsif( $c eq 'F' ) { ## Move ship
-      $x += $n * $wx;
-      $y += $n * $wy;
-    } else { ## Move waypoint
-      $wx += $n if $c eq 'E';
-      $wx -= $n if $c eq 'W';
-      $wy += $n if $c eq 'N';
-      $wy -= $n if $c eq 'S';
-    }
+    $act{$c}($n);
   }, $file_name );
 
   return abs($x) + abs($y);
