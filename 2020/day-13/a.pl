@@ -18,18 +18,14 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution(939,'7,13,x,x,59,x,31,19'),295);
 done_testing();
 
-say solution();
+say solution(1005595,'41,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,37,x,x,x,x,x,557,x,29,x,x,x,x,x,x,x,x,x,x,13,x,x,x,17,x,x,x,x,x,23,x,x,x,x,x,x,x,419,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,19');
 
 sub solution {
-  my $file_name = shift;
-  # Initialize slurp variables
-  slurp_file( sub {
-    # Code to process each line of input
-  }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  my( $id, $next, $t0, @times ) = ( undef, 1e30, $_[0], grep { m{\d} } split m{,}, $_[1] );
+  ($id,$next) = $_ - ( $t0 % $_ ) > $next ? ($id,$next) : ($_,$_ - ( $t0 % $_ )) for @times;
+  return $next * $id ;
 }
 

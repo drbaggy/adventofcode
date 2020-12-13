@@ -18,18 +18,25 @@ use lib $ROOT_PATH;
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution('7,13,x,x,59,x,31,19'),1068781);
+is( solution('17,x,13,19'),        3417);
+is( solution('67,7,59,61'),        754018);
+is( solution('67,x,7,59,61'),      779210);
+is( solution('67,7,x,59,61'),      1261476);
+is( solution('1789,37,47,1889'),   1202161486);
+
 done_testing();
 
-say solution();
+say solution('41,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,37,x,x,x,x,x,557,x,29,x,x,x,x,x,x,x,x,x,x,13,x,x,x,17,x,x,x,x,x,23,x,x,x,x,x,x,x,419,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,19');
 
 sub solution {
-  my $file_name = shift;
-  # Initialize slurp variables
-  slurp_file( sub {
-    # Code to process each line of input
-  }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  my ( $result, $index, $mult, @times ) = ( 0, 0, split m{,}, $_[0] );
+  foreach (@times) {
+    $index++;
+    next if $_ eq 'x';
+    $result += $mult while ($result+$index) % $_;
+    $mult *= $_;
+  }
+  return $result;
 }
 
