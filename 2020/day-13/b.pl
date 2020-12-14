@@ -53,4 +53,3 @@ sub lcm {
   return $p/$a;
 }
 
-
