@@ -33,11 +33,12 @@ done_testing();
 say solution(17,1,3,16,19,0);
 
 sub solution {
-  my ($index,$last,%spoken) = (0);
-  $last = pop @_;
-  $spoken{shift @_}=$index++ while @_;
+  my ($index,$last,@spoken) = (0);
   start_timer();
-  ( $last, $spoken{$last} ) = ( exists $spoken{$last} ? $_-$spoken{$last} : 0, $_ ) foreach $index .. $MAX-2;
+  $spoken[ $MAX+2 ] = 0;
+  $last = pop @_;
+  $spoken[shift @_]=$index++ while @_;
+  ( $last, $spoken[$last] ) = ( exists $spoken[$last] ? $_-$spoken[$last] : 0, $_ ) foreach $index .. $MAX-2;
   say duration();
   return $last;
 }
