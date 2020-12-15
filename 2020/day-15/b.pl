@@ -15,21 +15,30 @@ my $ROOT_PATH;
 BEGIN { $ROOT_PATH = dirname(dirname(dirname(abs_path($PROGRAM_NAME)))); }
 use lib $ROOT_PATH;
 
+#const my $MAX => 2020;
+const my $MAX => 30000000;
+
 use AdventSupport;
 ## END OF BOILER PLATE;
 
-is( solution('test.txt'), 'result');
+is( solution(0,3,6),  175594 );
+is( solution(1,3,2),    2578 );
+is( solution(2,1,3), 3544142 );
+is( solution(1,2,3),  261214 );
+is( solution(2,3,1), 6895259 );
+is( solution(3,2,1),      18 );
+is( solution(3,1,2),     362 );
 done_testing();
 
-say solution();
+say solution(17,1,3,16,19,0);
 
 sub solution {
-  my $file_name = shift;
-  # Initialize slurp variables
-  slurp_file( sub {
-    # Code to process each line of input
-  }, $file_name );
-  ## Now the work horse bit
-  return 'result';
+  my ($index,$last,%spoken) = (0);
+  $last = pop @_;
+  $spoken{shift @_}=$index++ while @_;
+  start_timer();
+  ( $last, $spoken{$last} ) = ( exists $spoken{$last} ? $_-$spoken{$last} : 0, $_ ) foreach $index .. $MAX-2;
+  say duration();
+  return $last;
 }
 
