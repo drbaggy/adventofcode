@@ -3,9 +3,9 @@
 use strict;
 use warnings;
 use feature qw(say);
-use Data::Dumper qw(Dumper);
 
 my $total = 0;
+
 while( my $line = <>) {
   ## Process line to get out 14 strings into array.
   ## Extract last 4 which out the output - which we will need later.
