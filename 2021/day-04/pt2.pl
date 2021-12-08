@@ -33,7 +33,6 @@ while(@N) {
   $seen{$n}=1;
   my @t_cards;
   CARD: foreach my $c ( @cards ) {
-    #warn "** $n ***";
     if( exists $c->[1]{$n} ) {
       $c->[2] |= (1<<$c->[1]{$n});
       foreach(@matches) {
@@ -44,7 +43,6 @@ while(@N) {
     push @t_cards,$c;
   }
   @cards = @t_cards;
-  warn "$n - ",scalar @cards, "\n";
   last if @cards == 1;
 }
 my $t = -$N[0];

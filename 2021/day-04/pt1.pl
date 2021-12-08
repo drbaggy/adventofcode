@@ -36,11 +36,11 @@ foreach my $n ( @N ) {
       next unless ($c->[2] & $_ ) == $_;
       my $t = 0;
       $t+=$_ foreach grep { !$seen{$_} } @{$c->[0]};
-      my @T = @{$c->[0]};
-      while(my @Q = splice @T,0,5) {
-        printf '%2d%s   ', $_, $seen{$_}?'*':' ' foreach @Q;
-        print "\n";
-      }
+#      my @T = @{$c->[0]};
+#      while(my @Q = splice @T,0,5) {
+#        printf '%2d%s   ', $_, $seen{$_}?'*':' ' foreach @Q;
+#        print "\n";
+#      }
       say $t, ' x ', $n;
       say $t*$n; exit;
     }
