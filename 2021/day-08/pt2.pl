@@ -35,7 +35,7 @@ while( my $line = <> ) {
   ## We create regexs to match the numbers 1, 4, 7 as we can use these
   ## to distinguish certain numbers.
 
-  my ($re1,$re4,$re7) = map { join '.*',split//,$digits[$_] } (1,4,7);
+  my ($re1,$re4) = map { join '.*',split//,$digits[$_] } (1,4);
 
   ## There are three digits with 6-character strings 0, 6 & 9.
   ## Of these the only one that "contains" the number 4 is 9...
@@ -50,7 +50,7 @@ while( my $line = <> ) {
   ## 6. So we use this to identify 2.
 
   my $re6not = '[^'.$digits[6].']';
-  $digits[ /$re7/ ? 3 : /$re6not/ ? 2 : 5 ] = $_ for @{$len[5]};
+  $digits[ /$re1/ ? 3 : /$re6not/ ? 2 : 5 ] = $_ for @{$len[5]};
 
   ## To get the number first we flip the keys/values of the array of
   ## digits. And then use this to generate the 4 digits. We add this to
