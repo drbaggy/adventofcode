@@ -6,7 +6,8 @@ use feature qw(say);
 
 my $total = 0;
 
-while( my $line = <>) {
+while( my $line = <> ) {
+
   ## Process line to get out 14 strings into array.
   ## Extract last 4 which out the output - which we will need later.
   ## To avoid ambiguity and to make the regex solution work we sort the
