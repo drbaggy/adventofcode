@@ -5,20 +5,18 @@ use warnings;
 use feature qw(say);
 use Data::Dumper qw(Dumper);
 
-my %M = qw'( 1 [ 2 { 3 < 4';
+my %M = qw'( 1 [ 2 { 3 < 4 ) 3 ] 57 } 1197 > 25137';
 
-my @S;
+my $T;my @S;
 while(<>) {
   chomp;
-  ## Remove all paired brackets...
-  1 while s{(\[\]|\(\)|\{\}|<>)}{}g;
-  ## Valid or invalid
-  next if !$_ || m/([\]}>)])/;
-  ## Compute score for all open brackets
-  push @S,0;
-  $S[-1]=5*$S[-1]+$M{$_} for reverse split //;
+## Remove all paired brackets...
+  1 while s/(\[\]|\(\)|\{\}|<>)//g;
+    '' eq $_     ? 0
+  : m/([\]}>)])/ ? ( $T+=$M{$1} )
+  :                ( (push @S,0), map {$S[-1]=5*$S[-1]+$M{$_}} reverse split // );
 }
 
 ## Find median value
-say [sort{$a<=>$b}@S]->[@S>>1];
+say 'pt1 ',$T,"\n",'pt2 ',(sort{$a<=>$b}@S)[@S>>1];
 
