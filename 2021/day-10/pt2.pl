@@ -15,4 +15,5 @@ while(<>) {
   push @S,0;
   $S[-1]=5*$S[-1]+$M{$_} for reverse split //;
 }
-say [sort{$a<=>$b}@S]->[(@S-1)/2];
+say [sort{$a<=>$b}@S]->[@S>>1];
+
