@@ -5,11 +5,12 @@ use warnings;
 use feature qw(say);
 use Data::Dumper qw(Dumper);
 
+my %M = (')'=>3,']'=>57,'}'=>1197,'>',25137);
+
 my $c = 0;
-my $t = <>;
 while(<>) {
-  $c++ if $_ > $t;
-  $t=$_;
+  1 while s{(\[\]|\(\)|\{\}|<>)}{}g;
+  $c+=$M{$1} if m/([\]\}>\)])/;
 }
 
 say $c;
