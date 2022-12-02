@@ -1,4 +1,7 @@
 # Day 1: Calorie Counting
+
+**Files:** [Solution to day 1](01.pl), [Input for day 2](data/01.txt).
+
 Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas. For that, their favorite snack is a special type of star fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
 
 To supply enough magical energy, the expedition needs to retrieve a minimum of fifty stars by December 25th. Although the Elves assure you that the grove has plenty of fruit, you decide to grab any fruit you see along the way, just in case.
@@ -54,6 +57,9 @@ Find the top three Elves carrying the most Calories. How many Calories are those
 Your puzzle answer was `197301`.
 
 # Day 2: Rock Paper Scissors
+
+**Files:** [Solution to day 2](02.pl), [Input for day 2](data/02.txt).
+
 The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.
 
 Rock Paper Scissors is a game between two players. Each game contains many rounds; in each round, the players each simultaneously choose one of Rock, Paper, or Scissors using a hand shape. Then, a winner for that round is selected: Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock. If both players choose the same shape, the round instead ends in a draw.
