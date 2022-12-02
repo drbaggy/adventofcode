@@ -1,6 +1,6 @@
 # Day 1: Calorie Counting
 
-**Files:** [Solution to day 1](01.pl), [Input for day 2](data/01.txt).
+**Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt).
 
 Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas. For that, their favorite snack is a special type of star fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
 
