@@ -1,6 +1,6 @@
 # Day 1: Calorie Counting
 
-**Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt).
+**Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt), [Output for day 1](out/01.txt).
 
 Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas. For that, their favorite snack is a special type of star fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
 
@@ -58,7 +58,7 @@ Your puzzle answer was `197301`.
 
 # Day 2: Rock Paper Scissors
 
-**Files:** [Solution to day 2](02.pl), [Input for day 2](data/02.txt).
+**Files:** [Solution to day 2](02.pl), [Input for day 2](data/02.txt), [Output for day 2](out/02.txt).
 
 The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.
 
