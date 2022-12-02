@@ -1,3 +1,10 @@
+
+ * [Day 1: Calorie counting](#day-1-calorie-counting)
+ * [Day 2: Rock, paper, scissors](#day-1-rock-paper-scissors)
+
+
+
+
 # Day 1: Calorie Counting
 
 **Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt), [Output for day 1](out/01.txt).
