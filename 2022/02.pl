@@ -17,7 +17,7 @@ my($n,%sn)=(0,'A X'=>3,'A Y'=>4,'A Z'=>8,'B X'=>1,'B Y'=>5,'B Z'=>9,'C X'=>2,'C 
 ## part 1 & part 2, (in $t & $n respectively)
 
 open my $fh, '<', 'data/02.txt';
-chomp, $t+=$st{$_}, $n+=$sn{$_} while <$fh>;
+chomp, $t += $st{$_}, $n += $sn{$_} while <$fh>;
 close $fh;
 
 ## Output the two scores:
