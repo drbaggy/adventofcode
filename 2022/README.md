@@ -1,6 +1,6 @@
 
  * [Day 1: Calorie counting](#day-1-calorie-counting)
- * [Day 2: Rock, paper, scissors](#day-1-rock-paper-scissors)
+ * [Day 2: Rock, paper, scissors](#day-2-rock-paper-scissors)
 
 
 
