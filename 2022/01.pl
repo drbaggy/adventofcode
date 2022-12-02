@@ -2,8 +2,7 @@ use strict;
 use warnings;
 use feature qw(say);
 
-## Elves is the list of calories carried by each
-## elf.
+## `@e` is the list of calories carried by each elf.
 
 my @e=(0);
 
@@ -12,13 +11,25 @@ my @e=(0);
 ## the calories as 0 o/w we add the calories to the
 ## last elf in the list.
 
+## We use the ternary operator to create an
+## `if`/`else` command within the postfix `while`
+## a trick to make perl code even more compact.
+
 open my $fh, '<', 'data/01.txt';
-/\d/ ? ($e[-1]+=$_) : push@e,0 while<$fh>;
+/\d/ ? ($e[-1]+=$_) : push @e,0 while <$fh>;
 close $fh;
 
-## We use a self executing closure to take the
-## output of a numeric sort to compute the highest
-## total for an elf AND the highest total for the
-## top three elves.
+## We use a IIFE, that takes the output of a numeric
+## sort (of the elves) to compute the highest total
+## for an elf AND the highest total for the top
+## three elves.
 
 say for sub { $_[0], $_[0]+$_[1]+$_[2] }->(sort {$b<=>$a} @e);
+
+## IIFE - *I*mmediately *I*nvoked *F*unction *E*xpression
+##
+## Is a function (in this case as closure) which is
+## executed immediately that it is defined. This is
+## common practice in Javascript to pass in an external
+## library *OR* alias an object or method to make
+## the internal code shorter/easier to read.
