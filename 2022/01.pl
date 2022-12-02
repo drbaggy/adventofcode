@@ -27,7 +27,7 @@ close $fh;
 say for sub { $_[0], $_[0]+$_[1]+$_[2] }->(sort {$b<=>$a} @e);
 
 ## IIFE - *I*mmediately *I*nvoked *F*unction *E*xpression
-##
+
 ## Is a function (in this case as closure) which is
 ## executed immediately that it is defined. This is
 ## common practice in Javascript to pass in an external
