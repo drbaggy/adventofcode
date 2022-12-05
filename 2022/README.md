@@ -3,6 +3,7 @@
  * [Day 2: Rock, paper, scissors](#day-2-rock-paper-scissors)
  * [Day 3: Rucksack reorganization](#day-3-rucksack-reorganization)
  * [Day 4: Camp cleanup](#day-4-camp-cleanup)
+ * [Day 5: Supply stacks](#day-5-supply-stacks)
 
 
 
@@ -158,8 +159,6 @@ Your puzzle answer was `8243`.
 
 ## Part 2
 
-**Files:** [Solution to day 4](04.pl), [Input for day 4](data/04.txt), [Output for day 4](out/04.txt).
-
 As you finish identifying the misplaced items, the Elves come to you with another issue.
 
 For safety, the Elves are divided into groups of three. Every Elf carries a badge that identifies their group. For efficiency, within each group of three Elves, the badge is the only item type carried by all three Elves. That is, if a group's badge is item type `B`, then all three Elves will have item type `B` somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.
@@ -191,6 +190,8 @@ Find the item type that corresponds to the badges of each three-Elf group. What 
 Your puzzle answer was `2631`.
 
 # Day 4: Camp cleanup
+
+**Files:** [Solution to day 4](04.pl), [Input for day 4](data/04.txt), [Output for day 4](out/04.txt).
 
 Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp. Every section has a unique ID number, and each Elf is assigned a range of section IDs.
 
@@ -253,3 +254,129 @@ So, in this example, the number of overlapping assignment pairs is 4.
 In how many assignment pairs do the ranges overlap?
 
 Your puzzle answer was `837`.
+
+# Day 5: Supply stacks
+
+**Files:** [Solution to day 5](05.pl), [Input for day 5](data/05.txt), [Output for day 5](out/05.txt).
+
+The expedition can depart as soon as the final supplies have been unloaded from the ships. Supplies are stored in stacks of marked crates, but because the needed supplies are buried under many other crates, the crates need to be rearranged.
+
+The ship has a giant cargo crane capable of moving crates between stacks. To ensure none of the crates get crushed or fall over, the crane operator will rearrange them in a series of carefully-planned steps. After the crates are rearranged, the desired crates will be at the top of each stack.
+
+The Elves don't want to interrupt the crane operator during this delicate procedure, but they forgot to ask her which crate will end up where, and they want to be ready to unload them as soon as possible so they can embark.
+
+They do, however, have a drawing of the starting stacks of crates and the rearrangement procedure (your puzzle input). For example:
+
+```
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
+```
+In this example, there are three stacks of crates. **Stack 1** contains two crates: crate `Z` is on the bottom, and crate `N` is on top. **Stack 2** contains three crates; from bottom to top, they are crates `M`, `C`, and `D`. Finally, **stack 3** contains a single crate, `P`.
+
+Then, the rearrangement procedure is given. In each step of the procedure, a quantity of crates is moved from one stack to a different stack. In the first step of the above rearrangement procedure, one crate is moved from stack 2 to stack 1, resulting in this configuration:
+
+```
+[D]        
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+```
+In the second step, three crates are moved from stack 1 to stack 3. Crates are moved one at a time, so the first crate to be moved (`D`) ends up below the second and third crates:
+
+```
+        [Z]
+        [N]
+    [C] [D]
+    [M] [P]
+ 1   2   3
+```
+Then, both crates are moved from stack 2 to stack 1. Again, because crates are moved one at a time, crate `C` ends up below crate `M`:
+
+```
+        [Z]
+        [N]
+[M]     [D]
+[C]     [P]
+ 1   2   3
+```
+Finally, one crate is moved from stack 1 to stack 2:
+
+```
+        [Z]
+        [N]
+        [D]
+[C] [M] [P]
+ 1   2   3
+```
+The Elves just need to know which crate will end up on top of each stack; in this example, the top crates are `C` in stack 1, `M` in stack 2, and `Z` in stack 3, so you should combine these together and give the Elves the message `CMZ`.
+
+After the rearrangement procedure completes, what crate ends up on top of each stack?
+
+Your puzzle answer was `VCTFTJQCG`.
+
+## Part 2
+
+As you watch the crane operator expertly rearrange the crates, you notice the process isn't following your prediction.
+
+Some mud was covering the writing on the side of the crane, and you quickly wipe it away. The crane isn't a CrateMover 9000 - it's a CrateMover 9001.
+
+The CrateMover 9001 is notable for many new and exciting features: air conditioning, leather seats, an extra cup holder, and the ability to pick up and move multiple crates at once.
+
+Again considering the example above, the crates begin in the same configuration:
+
+```
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+```
+Moving a single crate from stack 2 to stack 1 behaves the same as before:
+
+```
+[D]        
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+```
+However, the action of moving three crates from stack 1 to stack 3 means that those three moved crates stay in the same order, resulting in this new configuration:
+
+```
+        [D]
+        [N]
+    [C] [Z]
+    [M] [P]
+ 1   2   3
+```
+
+Next, as both crates are moved from stack 2 to stack 1, they retain their order as well:
+
+```
+        [D]
+        [N]
+[C]     [Z]
+[M]     [P]
+ 1   2   3
+```
+
+Finally, a single crate is still moved from stack 1 to stack 2, but now it's crate C that gets moved:
+
+```
+        [D]
+        [N]
+        [Z]
+[M] [C] [P]
+ 1   2   3
+```
+
+In this example, the CrateMover 9001 has put the crates in a totally different order: `MCD`.
+
+Before the rearrangement process finishes, update your simulation so that the Elves know where they should stand to be ready to unload the final supplies. After the rearrangement procedure completes, what crate ends up on top of each stack?
+
+Your puzzle answer was `GCFGLDNJZ`.
