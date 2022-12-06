@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 use feature qw(say);
+use Time::HiRes qw(time);
+my $time = time;
 
 ## We could do some splitting and nice function to work out
 ## the score for each line, but we don't need to - we can
@@ -22,5 +24,5 @@ close $fh;
 
 ## Output the two scores:
 
-say"$t\n$n"
-
+say "\nTime :", sprintf '%0.6f', time-$time;
+say"$t\n$n";

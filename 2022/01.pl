@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 use feature qw(say);
+use Time::HiRes qw(time);
+my $time = time;
 
 ## `@e` is the list of calories carried by each elf.
 
@@ -24,6 +26,7 @@ close $fh;
 ## for an elf AND the highest total for the top
 ## three elves.
 
+say "\nTime :", sprintf '%0.6f', time-$time;
 say for sub { $_[0], $_[0]+$_[1]+$_[2] }->(sort {$b<=>$a} @e);
 
 ## IIFE - *I*mmediately *I*nvoked *F*unction *E*xpression
@@ -33,3 +36,4 @@ say for sub { $_[0], $_[0]+$_[1]+$_[2] }->(sort {$b<=>$a} @e);
 ## common practice in Javascript to pass in an external
 ## library *OR* alias an object or method to make
 ## the internal code shorter/easier to read.
+

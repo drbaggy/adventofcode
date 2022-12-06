@@ -1,12 +1,14 @@
 use strict;
 use warnings;
 use feature qw(say);
+use Time::HiRes qw(time);
+my $time = time;
 
 ## Rather than using a function to get the
 ## priority of a letter we just put together
 ## a quick look-up..
 
-my $c = my $T = 0;
+my $c = my $T = my $N = 0;
 my %P = map { $_ => ++$c } 'a'..'z','A'..'Z';
 
 ## We slurp the strings in an array - this is the
@@ -31,11 +33,6 @@ for (@in) {
   exists $t{$_} && ($T+=$P{$_},last) for split //,$x;
 }
 
-## Output first score and reset
-
-say $T;
-$T = 0;
-
 ## For each triple - we create a hash for each letter
 ## which has the 1 bit set for line 1, 2 bit set for
 ## line 2 and 4 bit set for line 3..
@@ -46,10 +43,8 @@ $T = 0;
 
 while(my(@l,%C) = splice @in,0,3) {
   //,map{$C{$_}|=1<<$'}grep{/\w/}split//,$l[$'] for 0..2;
-  ($C{$_}==7) && ($T+=$P{$_},last)for keys %C;
+  ($C{$_}==7) && ($N+=$P{$_},last)for keys %C;
 }
 
-## Output the second score
-
-say $T;
-
+say "\nTime :", sprintf '%0.6f', time-$time;
+say "$T\t$N";

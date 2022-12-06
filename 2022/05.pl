@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 use feature qw(say);
-use Data::Dumper qw(Dumper);
+use Time::HiRes qw(time);
+my $time = time;
 
 my @p1 = (['']);
 my @p2 = (['']);
@@ -36,6 +37,6 @@ m{move (\d+) from (\d+) to (\d+)} &&
   ( unshift @{$p2[$3]},         splice @{$p2[$2]}, 0, $1 ) while <$fh>;
 close $fh;
 
+say "\nTime :", sprintf '%0.6f', time-$time;
 say join '', map { $_->[0] } @p1;
 say join '', map { $_->[0] } @p2;
-
