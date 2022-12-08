@@ -5,8 +5,10 @@
  * [Day 4: Camp cleanup](#day-4-camp-cleanup)
  * [Day 5: Supply stacks](#day-5-supply-stacks)
  * [Day 6: Tuning trouble](#day-6-tuning-trouble)
+ * [Day 7: No space left on device](#day-7-no-space-left-on-device)
+ * [Day 8: Treetop tree houses](#day-8-treetop-tree-houses)
 
-
+ ---
 # Day 1: Calorie Counting
 
 **Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt), [Output for day 1](out/01.txt).
@@ -435,3 +437,188 @@ Here are the first positions of start-of-message markers for all of the above ex
 How many characters need to be processed before the first start-of-message marker is detected?
 
 Your puzzle answer was `3037`.
+
+# Day 7: No Space Left On Device
+You can hear birds chirping and raindrops hitting leaves as the expedition proceeds. Occasionally, you can even hear much louder sounds in the distance; how big do the animals get out here, anyway?
+
+The device the Elves gave you has problems with more than just its communication system. You try to run a system update:
+
+```
+$ system-update --please --pretty-please-with-sugar-on-top
+Error: No space left on device
+Perhaps you can delete some files to make space for the update?
+```
+
+You browse around the filesystem to assess the situation and save the resulting terminal output (your puzzle input). For example:
+
+```
+$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k
+```
+
+The filesystem consists of a tree of files (plain data) and directories (which can contain other directories or files). The outermost directory is called /. You can navigate around the filesystem, moving into or out of directories and listing the contents of the directory you're currently in.
+
+Within the terminal output, lines that begin with `$` are commands you executed, very much like some modern computers:
+
+ * cd means change directory. This changes which directory is the current directory, but the specific result depends on the argument:
+    * cd `x` moves in one level: it looks in the current directory for the directory named `x` and makes it the current directory.
+    * cd `..` moves out one level: it finds the directory that contains the current directory, then makes that directory the current directory.
+    * cd `/` switches the current directory to the outermost directory, `/`.
+  * `ls means` list. It prints out all of the files and directories immediately contained by the current directory:
+  * `123 abc` means that the current directory contains a file named abc with size `123`.
+  * `dir xyz` means that the current directory contains a directory named `xyz`.
+
+Given the commands and output in the example above, you can determine that the filesystem looks visually like this:
+
+```
+- / (dir)
+  - a (dir)
+    - e (dir)
+      - i (file, size=584)
+    - f (file, size=29116)
+    - g (file, size=2557)
+    - h.lst (file, size=62596)
+  - b.txt (file, size=14848514)
+  - c.dat (file, size=8504156)
+  - d (dir)
+    - j (file, size=4060174)
+    - d.log (file, size=8033020)
+    - d.ext (file, size=5626152)
+    - k (file, size=7214296)
+```
+Here, there are four directories: / (the outermost directory), a and d (which are in /), and e (which is in a). These directories also contain files of various sizes.
+
+Since the disk is full, your first step should probably be to find directories that are good candidates for deletion. To do this, you need to determine the total size of each directory. The total size of a directory is the sum of the sizes of the files it contains, directly or indirectly. (Directories themselves do not count as having any intrinsic size.)
+
+The total sizes of the directories above can be found as follows:
+
+The total size of directory e is 584 because it contains a single file i of size 584 and no other directories.
+The directory a has total size 94853 because it contains files f (size 29116), g (size 2557), and h.lst (size 62596), plus file i indirectly (a contains e which contains i).
+Directory d has total size 24933642.
+As the outermost directory, / contains every file. Its total size is 48381165, the sum of the size of every file.
+To begin, find all of the directories with a total size of at most 100000, then calculate the sum of their total sizes. In the example above, these directories are a and e; the sum of their total sizes is 95437 (94853 + 584). (As in this example, this process can count files more than once!)
+
+Find all of the directories with a total size of at most 100000. What is the sum of the total sizes of those directories?
+
+Your puzzle answer was 1443806.
+
+## Part 2
+Now, you're ready to choose a directory to delete.
+
+The total disk space available to the filesystem is `70000000`. To run the update, you need unused space of at least `30000000`. You need to find a directory you can delete that will free up enough space to run the update.
+
+In the example above, the total size of the outermost directory (and thus the total amount of used space) is `48381165`; this means that the size of the unused space must currently be `21618835`, which isn't quite the `30000000` required by the update. Therefore, the update still requires a directory with total size of at least `8381165` to be deleted before it can run.
+
+To achieve this, you have the following options:
+
+ * Delete directory `e`, which would increase unused space by `584`.
+ * Delete directory `a`, which would increase unused space by `94853`.
+ * Delete directory `d`, which would increase unused space by `24933642`.
+ * Delete directory `/`, which would increase unused space by `48381165`.
+
+Directories `e` and `a` are both too small; deleting them would not free up enough space. However, directories `d` and `/` are both big enough! Between these, choose the smallest: `d`, increasing unused space by `24933642`.
+
+Find the smallest directory that, if deleted, would free up enough space on the filesystem to run the update. What is the total size of that directory?
+
+Your puzzle answer was `942298`.
+
+# Day 8: Treetop Tree House
+The expedition comes across a peculiar patch of tall trees all planted carefully in a grid. The Elves explain that a previous expedition planted these trees as a reforestation effort. Now, they're curious if this would be a good location for a tree house.
+
+First, determine whether there is enough tree cover here to keep a tree house hidden. To do this, you need to count the number of trees that are visible from outside the grid when looking directly along a row or column.
+
+The Elves have already launched a quadcopter to generate a map with the height of each tree (your puzzle input). For example:
+
+```
+30373
+25512
+65332
+33549
+35390
+```
+Each tree is represented as a single digit whose value is its height, where `0` is the shortest and `9` is the tallest.
+
+A tree is visible if all of the other trees between it and an edge of the grid are shorter than it. Only consider trees in the same row or column; that is, only look up, down, left, or right from any given tree.
+
+All of the trees around the edge of the grid are visible - since they are already on the edge, there are no trees to block the view. In this example, that only leaves the interior nine trees to consider:
+
+ * The top-left `5` is visible from the left and top. (It isn't visible from the right or bottom since other trees of height `5` are in the way.)
+ * The top-middle `5` is visible from the top and right.
+ * The top-right `1` is not visible from any direction; for it to be visible, there would need to only be trees of height `0` between it and an edge.
+ * The left-middle `5` is visible, but only from the right.
+ * The center `3` is not visible from any direction; for it to be visible, there would need to be only trees of at most height `2` between it and an edge.
+ * The right-middle `3` is visible from the right.
+ * In the bottom row, the middle `5` is visible, but the `3` and `4` are not.
+
+With 16 trees visible on the edge and another `5` visible in the interior, a total of `21` trees are visible in this arrangement.
+
+Consider your map; how many trees are visible from outside the grid?
+
+Your puzzle answer was `1708`.
+
+## Part 2
+
+Content with the amount of tree cover available, the Elves just need to know the best spot to build their tree house: they would like to be able to see a lot of trees.
+
+To measure the viewing distance from a given tree, look up, down, left, and right from that tree; stop if you reach an edge or at the first tree that is the same height or taller than the tree under consideration. (If a tree is right on the edge, at least one of its viewing distances will be zero.)
+
+The Elves don't care about distant trees taller than those found by the rules above; the proposed tree house has large eaves to keep it dry, so they wouldn't be able to see higher than the tree house anyway.
+
+In the example above, consider the middle 5 in the second row:
+
+```
+30373
+25512
+65332
+33549
+35390
+```
+
+ * Looking up, its view is not blocked; it can see 1 tree (of height `3`).
+ * Looking left, its view is blocked immediately; it can see only 1 tree (of height `5`, right next to it).
+ * Looking right, its view is not blocked; it can see `2` trees.
+ * Looking down, its view is blocked eventually; it can see `2` trees (one of height `3`, then the tree of height `5` that blocks its view).
+
+A tree's scenic score is found by multiplying together its viewing distance in each of the four directions. For this tree, this is `4` (found by multiplying `1 * 1 * 2 * 2`).
+
+However, you can do even better: consider the tree of height `5` in the middle of the fourth row:
+
+```
+30373
+25512
+65332
+33549
+35390
+```
+
+ * Looking up, its view is blocked at `2` trees (by another tree with a height of `5`).
+ * Looking left, its view is not blocked; it can see `2` trees.
+ * Looking down, its view is also not blocked; it can see `1` tree.
+ * Looking right, its view is blocked at `2` trees (by a massive tree of height `9`).
+
+This tree's scenic score is `8` (`2 * 2 * 1 * 2`); this is the ideal spot for the tree house.
+
+Consider each tree on your map. What is the highest scenic score possible for any tree?
+
+Your puzzle answer was `504000`.
