@@ -11,7 +11,10 @@ close $fh;
 
 ## We now look for solutions for markers of length 4 and 14.
 
-say find_marker($input, $_) for 4,14;
+my @t = map { find_marker($input, $_) } 4,14;
+
+say "\nTime :", sprintf '%0.6f', time-$time;
+say for @t;
 
 ## find_marker takes two inputs the string, and the size of
 ## markers
