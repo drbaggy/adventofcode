@@ -6,7 +6,9 @@ my $time = time;
 
 my $t = my $n = 0;
 
-## Do stuff here...
+## First we read in our grid and create an
+## array of arrays `@`
+
 my @g;
 open my $fh, '<', 'data/08.txt';
 while(<$fh>){
@@ -14,11 +16,31 @@ while(<$fh>){
   push @g,[ split // ];
 }
 
-my $h = @g       -1;
-my $w = @{$g[0]} -1;
+my( $h, $w ) = ( $#g, @{$g[0]} -1 );
 
-for my $y (   0 .. $h ) {
-  for my $x ( 0 .. $w ) {
+## Skip edge trees as we know the either the "distance" is 0
+## and the visiblity is 1 - so doesn't affect distance calc
+## and we can note the sum of visible external trees is
+##    2 x h x w - 4
+## or
+##    2 * $h * $w
+## as we already subtract 1 from each...
+
+## For other trees, we start at the tree and work outwards. If
+## we hit a tree taller OR as tall the current tree we stop
+## counting and flag that the tree is not visible from that
+## direction. We exit the loop where we hit a tree taller or
+## as tall...
+
+## Once we have looked in all for directions from the tree
+## we (1) compute the score for part 2 by multiplying
+##        together the 4 distances...
+##    (2) count the tree as visible (any flag is not set)
+
+$t = 2*($h+$w);
+
+for my $y (   1 .. $h-1 ) {
+  for my $x ( 1 .. $w-1 ) {
     my ( $m, $f, @s )=( $g[$y][$x], 0, 0, 0, 0, 0 );
     $s[0]++, ($g[$_][$x] >= $m) && ($f|=1) && last for reverse    0 .. $y-1;
     $s[1]++, ($g[$_][$x] >= $m) && ($f|=2) && last for         $y+1 .. $h;
