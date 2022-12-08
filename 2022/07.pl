@@ -2,27 +2,18 @@ use strict;
 use warnings;
 use feature qw(say);
 use Time::HiRes qw(time);
-use Data::Dumper qw(Dumper);
 my $time = time;
 
 my $t = my $n = 0;
+my @keys;
+my %size;
 
 open my $fh, q(<), 'data/07.txt';
-my @keys = ('/ROOT');
-my %size;
-while(<$fh>) {
-  if( m{^(\d+)} ) {
-    $size{ $_ }+=$1 for @keys;
-  } elsif( m{\$ cd (\S+)} ) {
-    if($1 eq '..') {
-      pop @keys if @keys > 1;
-    } elsif( $1 eq '/' ) {
-      @keys = ('/ROOT');
-    } else {
-      push @keys, $keys[-1].'/'.$1;
-    }
-  }
-}
+  m{^(\d+)}       ? map { $size{$_}+=$1 } ('/ROOT', @keys)
+: m{\$ cd \.\.$}  ? pop @keys
+: m{\$ cd /$}     ? @keys=()
+: m{\$ cd (\S+)} && ( @keys ? push(@keys, $keys[-1].'/'.$1) : (@keys=($1)) )
+  while <$fh>;
 close $fh;
 
 $n = $size{'/ROOT'};

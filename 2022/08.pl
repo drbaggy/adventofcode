@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use feature qw(say);
 use Time::HiRes qw(time);
-use Data::Dumper qw(Dumper);
 my $time = time;
 
 my $t = my $n = 0;
