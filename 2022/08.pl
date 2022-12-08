@@ -7,33 +7,26 @@ my $time = time;
 my $t = my $n = 0;
 
 ## Do stuff here...
-my @grid;
+my @g;
 open my $fh, '<', 'data/08.txt';
 while(<$fh>){
   chomp;
-  push @grid,[ split // ];
+  push @g,[ split // ];
 }
 
-my $h = @grid       -1;
-my $w = @{$grid[0]} -1;
+my $h = @g       -1;
+my $w = @{$g[0]} -1;
 
 for my $y (   0 .. $h ) {
   for my $x ( 0 .. $w ) {
-    my ( $my_h, $f, @see )=( $grid[$y][$x], 0, 0, 0, 0, 0 );
-
-    ($grid[$_][$x] >= $my_h) && ($f|=1) for    0 .. $y-1;
-    ($grid[$_][$x] >= $my_h) && ($f|=2) for $y+1 .. $h;
-    ($grid[$y][$_] >= $my_h) && ($f|=4) for    0 .. $x-1;
-    ($grid[$y][$_] >= $my_h) && ($f|=8) for $x+1 .. $w;
-    $t++ unless $f == 15;
-
-    $see[0]++, ($grid[$_][$x] >= $my_h) && last for reverse    0 .. $y-1;
-    $see[1]++, ($grid[$_][$x] >= $my_h) && last for         $y+1 .. $h;
-    $see[2]++, ($grid[$y][$_] >= $my_h) && last for reverse    0 .. $x-1;
-    $see[3]++, ($grid[$y][$_] >= $my_h) && last for         $x+1 .. $w;
-    my $sc= $see[0]*$see[1]*$see[2]*$see[3];
-
-    $n = $sc if $sc > $n;
+    my ( $m, $f, @s )=( $g[$y][$x], 0, 0, 0, 0, 0 );
+    $s[0]++, ($g[$_][$x] >= $m) && ($f|=1) && last for reverse    0 .. $y-1;
+    $s[1]++, ($g[$_][$x] >= $m) && ($f|=2) && last for         $y+1 .. $h;
+    $s[2]++, ($g[$y][$_] >= $m) && ($f|=4) && last for reverse    0 .. $x-1;
+    $s[3]++, ($g[$y][$_] >= $m) && ($f|=8) && last for         $x+1 .. $w;
+    my $p = $s[0] * $s[1] * $s[2] * $s[3];
+    $n = $p if     $n <  $p;
+    $t++    unless $f == 15;
   }
 }
 
