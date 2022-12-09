@@ -31,5 +31,5 @@ close $fh;
 
 ## Output the two scores:
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say"$t\n$n";

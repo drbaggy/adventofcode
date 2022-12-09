@@ -46,5 +46,5 @@ while(my(@l,%C) = splice @in,0,3) {
   ($C{$_}==7) && ($N+=$P{$_},last)for keys %C;
 }
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say "$T\t$N";

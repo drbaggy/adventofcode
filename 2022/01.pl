@@ -26,7 +26,7 @@ close $fh;
 ## for an elf AND the highest total for the top
 ## three elves.
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say for sub { $_[0], $_[0]+$_[1]+$_[2] }->(sort {$b<=>$a} @e);
 
 ## IIFE - *I*mmediately *I*nvoked *F*unction *E*xpression

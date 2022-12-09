@@ -52,5 +52,5 @@ for my $y (   1 .. $h-1 ) {
   }
 }
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say"$t\n$n";

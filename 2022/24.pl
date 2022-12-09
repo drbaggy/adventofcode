@@ -8,5 +8,5 @@ my $t = my $n = 0;
 
 ## Do stuff here...
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say"$t\n$n";

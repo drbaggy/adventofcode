@@ -37,6 +37,6 @@ m{move (\d+) from (\d+) to (\d+)} &&
   ( unshift @{$p2[$3]},         splice @{$p2[$2]}, 0, $1 ) while <$fh>;
 close $fh;
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say join '', map { $_->[0] } @p1;
 say join '', map { $_->[0] } @p2;

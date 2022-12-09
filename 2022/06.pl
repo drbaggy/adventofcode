@@ -13,7 +13,7 @@ close $fh;
 
 my @t = map { find_marker($input, $_) } 4,14;
 
-say "\nTime :", sprintf '%0.6f', time-$time;
+say "Time :", sprintf '%0.6f', time-$time;
 say for @t;
 
 ## find_marker takes two inputs the string, and the size of
