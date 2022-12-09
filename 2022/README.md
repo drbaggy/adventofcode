@@ -1,17 +1,23 @@
 # Timings and answers:
 
-| Day    | Title                                                     | Time        | Part 1    | Part 2    |
-| :----- | :-------------------------------------------------------- | ----------: | --------: | --------: |
-| Day 1  | [Calorie counting](#day-1-calorie-counting)               |   0.001 254 |    66 487 |   197 301 |
-| Day 2  | [Rock, paper, scissors](#day-2-rock-paper-scissors)       |   0.000 734 |    14 827 |    13 889 |
-| Day 3  | [Rucksack reorganization](#day-3-rucksack-reorganization) |   0.009 334 |     8 243 |     2 631 |
-| Day 4  | [Camp cleanup](#day-4-camp-cleanup)                       |   0.001 880 |       450 |       837 |
-| Day 5  | [Supply stacks](#day-5-supply-stacks)                     |   0.001 755 | VCTFTJQCG | GCFGLDNJZ |
-| Day 6  | [Tuning trouble](#day-6-tuning-trouble)                   |   0.003 195 |     1 238 |     3 037 |
-| Day 7  | [No space left on device](#day-7-no-space-left-on-device) |   0.001 319 | 1 443 806 |   942 298 |
-| Day 8  | [Treetop tree houses](#day-8-treetop-tree-houses)         |   0.037 244 |     1 708 |   504 000 |
-| Day 9  | [Rope bridge](#day-9-rope-bridge)                         |   0.057 472 |     5 883 |     2 367 |
-| TOTAL  |                                                           |   0.114 187 |           |           |
+| Day    | Title                                                     | Time        | Part 1    | Part 2    | Size    |
+| :----- | :-------------------------------------------------------- | ----------: | --------: | --------: | ------: |
+| Day 1  | [Calorie counting](#day-1-calorie-counting)               |   0.001 254 |    66 487 |   197 301 |     299 |
+| Day 2  | [Rock, paper, scissors](#day-2-rock-paper-scissors)       |   0.000 734 |    14 827 |    13 889 |     436 |
+| Day 3  | [Rucksack reorganization](#day-3-rucksack-reorganization) |   0.009 334 |     8 243 |     2 631 |     579 |
+| Day 4  | [Camp cleanup](#day-4-camp-cleanup)                       |   0.001 880 |       450 |       837 |     357 |
+| Day 5  | [Supply stacks](#day-5-supply-stacks)                     |   0.001 755 | VCTFTJQCG | GCFGLDNJZ |     619 |
+| Day 6  | [Tuning trouble](#day-6-tuning-trouble)                   |   0.003 195 |     1 238 |     3 037 |     495 |
+| Day 7  | [No space left on device](#day-7-no-space-left-on-device) |   0.001 319 | 1 443 806 |   942 298 |     549 |
+| Day 8  | [Treetop tree houses](#day-8-treetop-tree-houses)         |   0.037 244 |     1 708 |   504 000 |     832 |
+| Day 9  | [Rope bridge](#day-9-rope-bridge)                         |   0.057 472 |     5 883 |     2 367 |     968 |
+|   | | | | |
+| TOTAL  |                                                           |   0.114 187 |           |           |   5 134 |
+
+**Notes:**
+ * `Time` is based on time to excute code - and does not include compile/set up time
+ * `Time` is time for one run - not a fixed value - as performance will be affected by other processes on the machine. After **Day 9** the overall operating time of all nine scripts is around 0.25 - 0.27 seconds.
+ * `Size` is the size without comments, but with the perl boiler plate and spaces between "top-level" sections of code
 
 # Day 1: Calorie Counting
 
