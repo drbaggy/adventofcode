@@ -1,14 +1,18 @@
+# Timings and answers:
 
- * [Day 1: Calorie counting](#day-1-calorie-counting)
- * [Day 2: Rock, paper, scissors](#day-2-rock-paper-scissors)
- * [Day 3: Rucksack reorganization](#day-3-rucksack-reorganization)
- * [Day 4: Camp cleanup](#day-4-camp-cleanup)
- * [Day 5: Supply stacks](#day-5-supply-stacks)
- * [Day 6: Tuning trouble](#day-6-tuning-trouble)
- * [Day 7: No space left on device](#day-7-no-space-left-on-device)
- * [Day 8: Treetop tree houses](#day-8-treetop-tree-houses)
- * [Day 9: Rope bridge](#day-9-rope-bridge)
- ---
+| Day    | Title                                                     | Time        | Part 1    | Part 2    |
+| :----- | :-------------------------------------------------------- | ----------: | --------: | --------: |
+| Day 1  | [Calorie counting](#day-1-calorie-counting)               |   0.001 254 |    66 487 |   197 301 |
+| Day 2  | [Rock, paper, scissors](#day-2-rock-paper-scissors)       |   0.000 734 |    14 827 |    13 889 |
+| Day 3  | [Rucksack reorganization](#day-3-rucksack-reorganization) |   0.009 334 |     8 243 |     2 631 |
+| Day 4  | [Camp cleanup](#day-4-camp-cleanup)                       |   0.001 880 |       450 |       837 |
+| Day 5  | [Supply stacks](#day-5-supply-stacks)                     |   0.001 755 | VCTFTJQCG | GCFGLDNJZ |
+| Day 6  | [Tuning trouble](#day-6-tuning-trouble)                   |   0.003 195 |     1 238 |     3 037 |
+| Day 7  | [No space left on device](#day-7-no-space-left-on-device) |   0.001 319 | 1 443 806 |   942 298 |
+| Day 8  | [Treetop tree houses](#day-8-treetop-tree-houses)         |   0.037 244 |     1 708 |   504 000 |
+| Day 9  | [Rope bridge](#day-9-rope-bridge)                         |   0.057 472 |     5 883 |     2 367 |
+| TOTAL  |                                                           |   0.114 187 |           |           |
+
 # Day 1: Calorie Counting
 
 **Files:** [Solution to day 1](01.pl), [Input for day 1](data/01.txt), [Output for day 1](out/01.txt).
@@ -640,6 +644,8 @@ Your puzzle answer was `504000`.
  * [Top](#readme)
 
 # Day 9: Rope Bridge
+
+**Files:** [Solution to day 9](09.pl), [Input for day 9](data/09.txt), [Output for day 9](out/09.txt).
 
 This rope bridge creaks as you walk along it. You aren't sure how old it is, or whether it can even support your weight.
 
