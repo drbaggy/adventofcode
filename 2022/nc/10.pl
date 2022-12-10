@@ -1,4 +1,4 @@
-my($p,$x,$z,$t,$n)=(1,1,40,0,'');
+my($p,$x,$z,$t,$n)=(1,1,0,0,'');
 open my $fh, q(<), 'data/10.txt';
 o(),/addx (\S+)/&&(o(),$x+=$1) while <$fh>;
 close $fh;
