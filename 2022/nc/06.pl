@@ -1,10 +1,6 @@
-open my $fh, q(<), 'data/06.txt' or die "No input";
-my $input = <$fh>;
-close $fh;
-my @t = map { find_marker($input, $_) } 4,14;
-say for @t;
-sub find_marker {
-  my $block = substr my $str = $_[0], 0, my $n = $_[1], '';
-  $block =~ /(.).*\1/ ? ( $n++, $block = substr( $block, 1 ) . substr $str, 0, 1, '' )
-                      : return $n      while $str;
+my$i=<>;
+sub f {
+my$x=substr my$s=$_[0],0,my$n=$_[1],'';
+$x=~/(.).*\1/?($n++,$x=substr($x,1).substr$s,0,1,''):return$n while$s
 }
+say for map{f $i,$_}4,14
