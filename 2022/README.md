@@ -11,9 +11,9 @@
 | Day 7  | [No space left on device](#day-7-no-space-left-on-device) |   0.001 319 | 1 443 806 |   942 298 |     455 |
 | Day 8  | [Treetop tree houses](#day-8-treetop-tree-houses)         |   0.037 244 |     1 708 |   504 000 |     705 |
 | Day 9  | [Rope bridge](#day-9-rope-bridge)                         |   0.033 472 |     5 883 |     2 367 |     650 |
-| Day 10 | [Cathode-ray tube](#day-10-cathode-ray-tube)              |   0.000 202 |    16 020 |  ECZUZALR |     225 |
+| Day 10 | [Cathode-ray tube](#day-10-cathode-ray-tube)              |   0.000 202 |    16 020 |  ECZUZALR |     224 |
 |   | | | | |
-| TOTAL  |                                                           |   0.090 389 |           |           |   4 043 |
+| TOTAL  |                                                           |   0.090 389 |           |           |   4 042 |
 
 **Notes:**
  * `Time` is based on time to excute code - and does not include compile/set up time
