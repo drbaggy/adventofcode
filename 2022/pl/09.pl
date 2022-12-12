@@ -14,7 +14,8 @@ my(%v,@r) = ('U'=>[0,1],'D'=>[0,-1],'R'=>[1,0],'L'=>[-1,0]);
 
 ## Slurp instructions into array as will be using twice...
 
-open my $fh, '<', 'data/09.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/09.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 my @l = map { / / && [ @{$v{$`}}, 0+$' ] } <$fh>;
 close $fh;
 

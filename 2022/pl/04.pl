@@ -23,10 +23,11 @@ my($t,$n);
 ## Here we use the "||" trick to replace an `unless` to update
 ## $n if this is false
 
-open my $fh, '<', 'data/04.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/04.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 m{ (\d+) - (\d+) , (\d+) - (\d+) }x,
-  ( $1<=$3 && $4<=$2 || $3<=$1 && $2<=$4 ) && $t++,
-    $4<$1            || $2<$3              || $n++ while <$fh>;
+  ($3-$1) * ($4-$2) > 0 || $t++,
+   $4<$1 ||  $2<$3      || $n++ while <$fh>;
 close $fh;
 
 ## Output the two scores:

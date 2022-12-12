@@ -17,7 +17,8 @@ my @e=(0);
 ## `if`/`else` command within the postfix `while`
 ## a trick to make perl code even more compact.
 
-open my $fh, '<', 'data/01.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/01.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 /\d/ ? ($e[-1]+=$_) : push @e,0 while <$fh>;
 close $fh;
 

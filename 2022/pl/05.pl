@@ -6,7 +6,8 @@ my $time = time;
 
 my @p1 = (['']);
 my @p2 = (['']);
-open my $fh, '<', 'data/05.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/05.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 
 ## We loop through teh first set of rows {those with [letter]
 ## stacks} in them finding the letters and putting them on the
@@ -20,7 +21,7 @@ while(my $row=<$fh>) {
   last unless $row=~m{\[};
   my $p = 0;
   ++$p, m{\w} && ( push @{$p1[$p]}, $& ) && push @{$p2[$p]}, $&
-    while $_=substr $row, 0, 4, '';
+    while $_=substr $row,0,4,'';
 }
 
 ## Now we loop through the rest of the file, following the
@@ -32,11 +33,10 @@ while(my $row=<$fh>) {
 ## off before pushing back onto the new stack. Whereas in part 2 we
 ## don't have to do this.
 
-m{move (\d+) from (\d+) to (\d+)} &&
-  ( unshift @{$p1[$3]}, reverse splice @{$p1[$2]}, 0, $1 ) &&
-  ( unshift @{$p2[$3]},         splice @{$p2[$2]}, 0, $1 ) while <$fh>;
+m{(\d+).*(\d+).*(\d+)}
+&& ( unshift @{$p1[$3]}, reverse splice @{$p1[$2]},0,$1 )
+&& ( unshift @{$p2[$3]},         splice @{$p2[$2]},0,$1 ) while <$fh>;
 close $fh;
 
 say "Time :", sprintf '%0.6f', time-$time;
-say join '', map { $_->[0] } @p1;
-say join '', map { $_->[0] } @p2;
+say join'',map{$_->[0]}@{$_}for\@p1,\@p2;

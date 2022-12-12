@@ -14,7 +14,8 @@ my($p,$x,$z,$t,$n)=(1,1,0,0,'');
 ## The if it is an add operation we run it again, and actually
 ## do the add to the register
 
-open my $fh, q(<), 'data/10.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/10.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, q(<), $fn;
 o(),/addx (\S+)/&&(o(),$x+=$1) while <$fh>;
 close $fh;
 

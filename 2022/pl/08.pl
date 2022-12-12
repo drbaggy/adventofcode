@@ -10,7 +10,8 @@ my $t = my $n = 0;
 ## array of arrays `@`
 
 my @g;
-open my $fh, '<', 'data/08.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/08.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 while(<$fh>){
   chomp;
   push @g,[ split // ];

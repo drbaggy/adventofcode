@@ -29,7 +29,8 @@ my( @k, %s );
 
 ## We use nested ternaries for this
 
-open my $fh, q(<), 'data/07.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/07.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, q(<), $fn;
   m{^(\d+)}       ? map { $s{$_}+=$1 } ('/', @k)
 : m{\$ cd \.\.$}  ? pop @k
 : m{\$ cd /$}     ? @k=()

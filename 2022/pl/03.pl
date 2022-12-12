@@ -8,14 +8,15 @@ my $time = time;
 ## priority of a letter we just put together
 ## a quick look-up..
 
-my $c = my $T = my $N = 0;
+my $c = my $T = my $N = 0; my $x;
 my %P = map { $_ => ++$c } 'a'..'z','A'..'Z';
 
 ## We slurp the strings in an array - this is the
 ## easiest way to grab 3 lines at a time - using
 ## splice below
 
-open my $fh, '<', 'data/03.txt';
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/03.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, '<', $fn;
 my @in = <$fh>;
 close $fh;
 
@@ -28,7 +29,7 @@ close $fh;
 ## find a duplicate...
 
 for (@in) {
-  my $x = $_;
+  $x = $_;
   my %t = map { $_ => 1 } split //, substr $x,0, 0.5 * length $x,'';
   exists $t{$_} && ($T+=$P{$_},last) for split //,$x;
 }
@@ -42,7 +43,7 @@ for (@in) {
 ## and bomb out!
 
 while(my(@l,%C) = splice @in,0,3) {
-  //,map{$C{$_}|=1<<$'}grep{/\w/}split//,$l[$'] for 0..2;
+  $x=$_,map{$C{$_}|=1<<$x}grep{/\w/}split//,$l[$x] for 0..2;
   ($C{$_}==7) && ($N+=$P{$_},last)for keys %C;
 }
 

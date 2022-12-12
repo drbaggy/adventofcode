@@ -7,12 +7,12 @@ open my $o, '>', \$out;
 my $std = select $o;
 my $t0 =time;
 my $T = 0;
-for ( 1..9 ){
+for ( 1..12 ){
   my $pd = sprintf 'YYYY%2d',$_;
   my $fn = sprintf '%02d',$_;
   $T += -s "nc/$fn.pl";
   print "XXXX  $pd  | ",sprintf('%6d',-s "nc/$fn.pl")," | ";
-   do "./$fn.pl";
+   do "./pl/$fn.pl";
 }
 select $std;
 close $o;

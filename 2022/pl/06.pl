@@ -5,7 +5,8 @@ my $time = time;
 
 ## We slurp the string in from the file.
 
-open my $fh, q(<), 'data/06.txt' or die "No input";
+my$fn=__FILE__=~s/[^\/]*$//r.'../data/06.txt';1while($fn=~s/[^\/]*\/\.\.\///);
+open my $fh, q(<), $fn or die "No input";
 my $input = <$fh>;
 close $fh;
 
