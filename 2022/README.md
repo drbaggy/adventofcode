@@ -5,7 +5,7 @@
 | Day 1  | [Calorie counting](01.md)        |   0.001 254 |    66 487 |         197 301 |      99 |
 | Day 2  | [Rock, paper, scissors](02.md)   |   0.000 734 |    14 827 |          13 889 |     181 |
 | Day 3  | [Rucksack reorganization](03.md) |   0.009 334 |     8 243 |           2 631 |     328 |
-| Day 4  | [Camp cleanup](04.md)            |   0.001 880 |       450 |             837 |      98 |
+| Day 4  | [Camp cleanup](04.md)            |   0.001 880 |       450 |             837 |      94 |
 | Day 5  | [Supply stacks](05.md)           |   0.001 755 | VCTFTJQCG |       GCFGLDNJZ |     326 |
 | Day 6  | [Tuning trouble](06.md)          |   0.003 195 |     1 238 |           3 037 |     154 |
 | Day 7  | [No space left on device](07.md) |   0.001 319 | 1 443 806 |         942 298 |     250 |
@@ -28,7 +28,7 @@
 | Day 24 | [x](24.md)                       |   0.000 000 |           |                 |       0 |
 | Day 25 | [x](25.md)                       |   0.000 000 |           |                 |       0 |
 |   | | | | |
-| TOTAL  |                                  |   0.687 870 |           |                 |   4 180 |
+| TOTAL  |                                  |   0.687 870 |           |                 |   4 174 |
 
 **Notes:**
  * `Time` is based on time to excute code - and does not include compile/set up time
