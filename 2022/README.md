@@ -5,15 +5,18 @@
 | Day 1  | [Calorie counting](#day-1-calorie-counting)               |   0.001 254 |    66 487 |   197 301 |     102 |
 | Day 2  | [Rock, paper, scissors](#day-2-rock-paper-scissors)       |   0.000 734 |    14 827 |    13 889 |     244 |
 | Day 3  | [Rucksack reorganization](#day-3-rucksack-reorganization) |   0.009 334 |     8 243 |     2 631 |     328 |
-| Day 4  | [Camp cleanup](#day-4-camp-cleanup)                       |   0.001 880 |       450 |       837 |     117 |
+| Day 4  | [Camp cleanup](#day-4-camp-cleanup)                       |   0.001 880 |       450 |       837 |     100 |
 | Day 5  | [Supply stacks](#day-5-supply-stacks)                     |   0.001 755 | VCTFTJQCG | GCFGLDNJZ |     326 |
 | Day 6  | [Tuning trouble](#day-6-tuning-trouble)                   |   0.003 195 |     1 238 |     3 037 |     154 |
 | Day 7  | [No space left on device](#day-7-no-space-left-on-device) |   0.001 319 | 1 443 806 |   942 298 |     250 |
 | Day 8  | [Treetop tree houses](#day-8-treetop-tree-houses)         |   0.037 244 |     1 708 |   504 000 |     464 |
 | Day 9  | [Rope bridge](#day-9-rope-bridge)                         |   0.033 472 |     5 883 |     2 367 |     462 |
-| Day 10 | [Cathode-ray tube](#day-10-cathode-ray-tube)              |   0.000 202 |    16 020 |  ECZUZALR |     169 |
+| Day 10 | [Cathode-ray tube](#day-10-cathode-ray-tube)              |   0.000 202 |    16 020 |  ECZUZALR |     160 |
+| Day 11 | x                                                         |   0.502 628 |   117 624 | 16 792 940 265 | 649 |
+| Day 12 | x                                                         |   0.006 856 |       412 |       402 |     458 |
+| Day 13 | [Distress signal(13.md)                                   |   0.021 269 |     6 428 |    22 464 |     549 |
 |   | | | | |
-| TOTAL  |                                                           |   0.090 389 |           |           |   2 616 |
+| TOTAL  |                                                           |   0.687 870 |           |           |   4 246 |
 
 **Notes:**
  * `Time` is based on time to excute code - and does not include compile/set up time
