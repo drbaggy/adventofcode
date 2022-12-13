@@ -1,4 +1,4 @@
-my($t,%st)=(0,'A X'=>4,'A Y'=>8,'A Z'=>3,'B X'=>1,'B Y'=>5,'B Z'=>9,'C X'=>7,'C Y'=>2,'C Z'=>6);
-my($n,%sn)=(0,'A X'=>3,'A Y'=>4,'A Z'=>8,'B X'=>1,'B Y'=>5,'B Z'=>9,'C X'=>2,'C Y'=>6,'C Z'=>7);
-chomp,$t+=$st{$_},$n+=$sn{$_}while<>;
+my($t,%st)=qw(0 AX 4 AY 8 AZ 3 BX 1 BY 5 BZ 9 CX 7 CY 2 CZ 6);
+my($n,%sn)=qw(0 AX 3 AY 4 AZ 8 BX 1 BY 5 BZ 9 CX 2 CY 6 CZ 7);
+s/\s//g,$t+=$st{$_}, $n+=$sn{$_} while <>;
 say"$t\n$n"

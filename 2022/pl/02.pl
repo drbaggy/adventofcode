@@ -12,15 +12,15 @@ my $time = time;
 ## %st is the scores for part 1 (and we use $t as the total)
 ## %sn is the scores for part 2 (and we use $n as the total)
 
-my($t,%st)=(0,'A X'=>4,'A Y'=>8,'A Z'=>3,'B X'=>1,'B Y'=>5,'B Z'=>9,'C X'=>7,'C Y'=>2,'C Z'=>6);
-my($n,%sn)=(0,'A X'=>3,'A Y'=>4,'A Z'=>8,'B X'=>1,'B Y'=>5,'B Z'=>9,'C X'=>2,'C Y'=>6,'C Z'=>7);
+my($t,%st)=qw(0 AX 4 AY 8 AZ 3 BX 1 BY 5 BZ 9 CX 7 CY 2 CZ 6);
+my($n,%sn)=qw(0 AX 3 AY 4 AZ 8 BX 1 BY 5 BZ 9 CX 2 CY 6 CZ 7);
 
 ## Loop through the file, keeping a running total for both
 ## part 1 & part 2, (in $t & $n respectively)
 
 my$fn=__FILE__=~s/[^\/]*$//r.'../data/02.txt';1while($fn=~s/[^\/]*\/\.\.\///);
 open my $fh, '<', $fn;
-chomp, $t += $st{$_}, $n += $sn{$_} while <$fh>;
+s/\s//g,$t+=$st{$_}, $n+=$sn{$_} while <$fh>;
 close $fh;
 
 ## Output the two scores:
