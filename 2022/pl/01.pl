@@ -19,7 +19,7 @@ my @e=(0);
 
 my$fn=__FILE__=~s/[^\/]*$//r.'../data/01.txt';1while($fn=~s/[^\/]*\/\.\.\///);
 open my $fh, '<', $fn;
-/\d/ ? ($e[-1]+=$_) : push @e,0 while <$fh>;
+/\d/ ? ($e[-1]+=$_) : push @e,0 for <$fh>;
 close $fh;
 
 ## We use a IIFE, that takes the output of a numeric
