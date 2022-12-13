@@ -9,7 +9,7 @@ my$fn=__FILE__=~s/[^\/]*$//r.'../data/13.txt';1while($fn=~s/[^\/]*\/\.\.\///);
 
 my($n,$t)=(0,1);
 open my $fh,'<',$fn;
-my @l = map { /\S/ ? eval $_ : ()  } <$fh>;
+my @l = map { /\S/ ? parse( $_ ) : ()  } <$fh>;
 
 ## Part 1...
 for(my $k=0;$k<@l;) {
@@ -18,9 +18,8 @@ for(my $k=0;$k<@l;) {
 
 ## Part 2...
 unshift @l,[[2]],[[6]];
-my @i = (0..$#l);
-my @r = sort { compare( @l[$b,$a] ) } @i;
-$r[$_] < 2 && ( $t *= ($_+1) ) for @i;
+my @r = sort { compare( @l[$b,$a] ) }     0..$#l;
+$r[$_] < 2 && ( $t *= ($_+1) )        for 0..$#l;
 
 say "Time :", sprintf '%0.6f', time-$time;
 say $n/2;
@@ -44,29 +43,14 @@ sub compare {
   ## Got to the end p1 < p2 if the length of p1 is less
   ## than length of p2 - or they are the same if the
   ## length is the same...
-  return @{$p1} < @{$p2};
+  return @{$p1} < @{$p2}
 }
 
 ## Don't need this - can you "eval" but I leave it here!
 sub parse {
-  $_ = shift;
-  my($res,$cur,@index)=[];
-  while( m{(\[|\]|\d+|,)} ) {
-    s{^(\[|\]|\d+|\,)}{};
-    if( $1 eq '[' ) {
-      if(!$cur) {
-        $cur = $res;
-      } else {
-        push @{$cur},[];
-        push @index, @{$cur=$cur->[-1]}-1;
-      }
-    } elsif( $1 eq ']' ) {
-      pop @index;
-      $cur = $res;
-      $cur = $cur->[$_] for @index;
-    } elsif( $1 ne ',' ) {
-      push @{$cur},$1;
-    }
-  }
-  $res;
+  my @i = [];
+  $_   eq '[' ?  ( push( @{$i[-1]}, [] ) && push @i,$i[-1][-1] )
+  : $_ eq ']' ?  pop @i
+  : $_ eq ',' || ( push @{$i[-1]}, $_ ) for $_[0] =~ m{(\[|\]|\d+|,)}g;
+  $i[0]
 }

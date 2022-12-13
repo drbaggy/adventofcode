@@ -4,9 +4,8 @@ for(my $k=0;$k<@l;) {
   $n += (compare( @l[$k++,$k++] )>0)*$k;
 }
 unshift @l,[[2]],[[6]];
-my @i = (0..$#l);
-my @r = sort { compare( @l[$b,$a] ) } @i;
-$r[$_] < 2 && ( $t *= ($_+1) ) for @i;
+my @r = sort { compare( @l[$b,$a] ) } 0..$#l;
+$r[$_] < 2 && ( $t *= ($_+1) )    for 0..$#l;
 
 say $n/2;
 say $t;
@@ -20,5 +19,5 @@ sub compare {
     : $p2->[$c] <=> $p1->[$c];
     return $t if $t;
   }
-  return @{$p1} < @{$p2};
+  @{$p1} < @{$p2}
 }
