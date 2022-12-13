@@ -27,7 +27,7 @@ my$fn=__FILE__=~s/[^\/]*$//r.'../data/04.txt';1while($fn=~s/[^\/]*\/\.\.\///);
 open my $fh, '<', $fn;
 m{ (\d+) - (\d+) , (\d+) - (\d+) }x,
   ($3-$1) * ($4-$2) > 0 || $t++,
-   $4<$1 ||  $2<$3      || $n++ while <$fh>;
+   $4<$1 ||  $2<$3      || $n++ for <$fh>;
 close $fh;
 
 ## Output the two scores:
