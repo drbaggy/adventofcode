@@ -14,7 +14,7 @@
 | Day 10 | [Cathode-ray tube](#day-10-cathode-ray-tube)              |   0.000 202 |    16 020 |  ECZUZALR |     160 |
 | Day 11 | x                                                         |   0.502 628 |   117 624 | 16 792 940 265 | 649 |
 | Day 12 | x                                                         |   0.006 856 |       412 |       402 |     458 |
-| Day 13 | [Distress signal(13.md)                                   |   0.021 269 |     6 428 |    22 464 |     549 |
+| Day 13 | [Distress signal](13.md)                                  |   0.021 269 |     6 428 |    22 464 |     549 |
 |   | | | | |
 | TOTAL  |                                                           |   0.687 870 |           |           |   4 246 |
 
