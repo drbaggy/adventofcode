@@ -28,7 +28,8 @@
 | Day 24 | [x](24.md)                       |   0.000 000 |           |                 |       0 |
 | Day 25 | [x](25.md)                       |   0.000 000 |           |                 |       0 |
 |   | | | | |
-| TOTAL  |                                  |   1.240 234 |           |                 |   4 642 |
+| TOTAL  |                                  |   1.160 204 |           |                 |   4 642 |
+| Average |                                 |   0.082 872 |           |                 |   331.6 |
 
 **Notes:**
  * `Time` is based on time to excute code - and does not include compile/set up time
