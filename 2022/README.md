@@ -1,6 +1,6 @@
 # Timings and answers:
 
-| Day    | Title                            | Time        | Part 1    | Part 2          | Size    |
+| Day    | Title                            | Time (seconds) | Part 1    | Part 2          | Size (bytes) |
 | :----- | :--------------------------------| ----------: | --------: | --------------: | ------: |
 | Day 1  | [Calorie counting](01.md)        |   0.001 254 |    66 487 |         197 301 |      99 |
 | Day 2  | [Rock, paper, scissors](02.md)   |   0.000 734 |    14 827 |          13 889 |     181 |
