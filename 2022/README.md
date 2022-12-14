@@ -13,9 +13,9 @@
 | Day 9  | [Rope bridge](09.md)             |   0.033 472 |     5 883 |           2 367 |     462 |
 | Day 10 | [Cathode-ray tube](10.md)        |   0.000 202 |    16 020 |        ECZUZALR |     160 |
 | Day 11 | [Monkey in the Middle](11.md)    |   0.502 628 |   117 624 |  16 792 940 265 |     649 |
-| Day 12 | [Hill Climbing Algorithm](12.md) |   0.006 856 |       412 |             402 |     458 |
+| Day 12 | [Hill climbing algorithm](12.md) |   0.006 856 |       412 |             402 |     458 |
 | Day 13 | [Distress signal](13.md)         |   0.021 269 |     6 428 |          22 464 |     549 |
-| Day 14 | [x](14.md)                       |   0.000 000 |           |                 |       0 |
+| Day 14 | [Regolith reservoir](14.md)      |   0.559 142 |       795 |          30 214 |     468 |
 | Day 15 | [x](15.md)                       |   0.000 000 |           |                 |       0 |
 | Day 16 | [x](16.md)                       |   0.000 000 |           |                 |       0 |
 | Day 17 | [x](17.md)                       |   0.000 000 |           |                 |       0 |
@@ -28,7 +28,7 @@
 | Day 24 | [x](24.md)                       |   0.000 000 |           |                 |       0 |
 | Day 25 | [x](25.md)                       |   0.000 000 |           |                 |       0 |
 |   | | | | |
-| TOTAL  |                                  |   0.687 870 |           |                 |   4 174 |
+| TOTAL  |                                  |   1.240 234 |           |                 |   4 642 |
 
 **Notes:**
  * `Time` is based on time to excute code - and does not include compile/set up time
