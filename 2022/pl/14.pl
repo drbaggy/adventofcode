@@ -22,8 +22,7 @@ close $fh;
 
 push @m, [], [ ('#') x (503+($z=$#m)) ];
 
-while(1) {
-  last if $m[$y=0][$x=500];
+until($m[$y=0][$x=500]) {
   while(1) {
     $n||=$t if (++$y)>$z;
     $m[$y][$x] && ( $m[$y][$x-1] ? $m[$y][$x+1] ? ($m[$y-1][$x]='o',$t++,last) : $x++ : $x-- );
