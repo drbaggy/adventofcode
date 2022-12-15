@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 
-my @names = (
+my @names = map { ucfirst lc $_ } (
   '-pad-',
   'Calorie counting',
   'Rock, paper, scissors',
@@ -12,10 +12,11 @@ my @names = (
   'Treetop tree houses',
   'Rope bridge',
   'Cathode-ray tube',
-  'Monkey in the Middle',
+  'Monkey in the middle',
   'Hill climbing algorithm',
   'Distress signal',
   'Regolith reservoir',
+  'Beacon exclusion zone',
 );
 use strict;
 use Time::HiRes qw(time);
