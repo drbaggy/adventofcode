@@ -6,7 +6,8 @@ my $time = time;
 
 ## Initialize the ptr, x-register, The horizonal positon of the CRT,
 ## The total for part 1 and the string for part 2
-my($p,$x,$z,$t,$n)=(1,1,0,0,'');
+my($p,$x,$t,$n)=(0,1,0,0,'');
+my @l=();
 
 ## Open programme and execute each line.
 ## The addx command is a noop + a single time unit add command
@@ -28,12 +29,50 @@ close $fh;
 ##   add a "\n" if we are at the start of the line...
 ## We then increment both pointers, and wrap z if requird.
 sub o {
-  $t += $p*$x if $z == 19;
-  $n .= ($z?'':"\n").(abs($z-$x)<2?'#':'.');
+  $p%40 || push @l,[];
+  $t += ($p+1)*$x if $p%40 == 19;
+  ($p%5) || push @{$l[-1]},'';
+  $l[-1][-1].= abs($p%40-$x)<2?'#':'.';
   $p ++;
-  $z ++;
-  $z %=40;
 }
 
 say "Time :", sprintf '%0.6f', time-$time;
-say"$t$n";
+
+say"$t";
+say letters(@l);
+
+letters(@l);
+sub letters {
+  my $o;
+  my %m = (
+    '.##..#..#.#..#.####.#..#.#..#.' => 'A',
+    'B' => 'B',
+    '.##..#..#.#....#....#..#..##..' => 'C',
+    'D' => 'D',
+    '####.#....###..#....#....####.' => 'E',
+    'F' => 'F',
+    'G' => 'G',
+    'H' => 'H',
+    'I' => 'I',
+    'J' => 'J',
+    'K' => 'K',
+    '#....#....#....#....#....####.' => 'L',
+    'M' => 'M',
+    'N' => 'N',
+    'O' => 'O',
+    'P' => 'P',
+    'Q' => 'Q',
+    '###..#..#.#..#.###..#.#..#..#.' => 'R',
+    'S' => 'S',
+    'T' => 'T',
+    '#..#.#..#.#..#.#..#.#..#..##..' => 'U',
+    'V' => 'V',
+    'W' => 'W',
+    'X' => 'X',
+    'Y' => 'Y',
+    '####....#...#...#...#....####.' => 'Z',
+  );
+  $o .= $m{join '', map { shift @{$_} } @_ } || '=' while @{$_[0]};
+  return $o;
+}
+
