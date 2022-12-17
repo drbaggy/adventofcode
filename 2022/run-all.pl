@@ -17,6 +17,7 @@ my @names = map { ucfirst lc $_ } (
   'Distress signal',
   'Regolith reservoir',
   'Beacon exclusion zone',
+  'Proboscidea Volcanium',
 );
 use strict;
 use Time::HiRes qw(time);
@@ -27,7 +28,7 @@ my $t0 =time;
 my $T = 0;
 my $N = 0;
 my $tot_time = 0;
-for ( 1 .. 25 ){
+for ( 1 .. 16 ){
   last unless -e sprintf 'data/%02d.txt', $_;
   my $pd = sprintf 'YYYY%2d',$_;
   my $fn = sprintf '%02d',$_;

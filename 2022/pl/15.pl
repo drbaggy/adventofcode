@@ -5,7 +5,7 @@ use Time::HiRes qw(time);
 use Data::Dumper qw(Dumper);
 
 my($t,$Y,$M,$f)=(0,2e6,4e6,'15.txt');
-## my($t,$Y,$M,$f)=(0, 10, 20,'t-15');
+#my($t,$Y,$M,$f)=(0, 10, 20,'t-15');
 
 my $fn=__FILE__=~s/[^\/]*$//r.'../data/'.$f;1while($fn=~s/[^\/]*\/\.\.\///);
 my $time = time;
@@ -15,8 +15,8 @@ my @rows = map { my @t = m{(-?\d+)}g;  [@t,abs($t[0]-$t[2]) + abs($t[1]-$t[3])] 
 close $fh;
 
 ## Find any beacons on $Y line
-my %b = map { ( "$_->[2] $_->[3]" =>1 ) } @rows;
-my($l,$n) = (-1e9, -grep { $_->[1] == $Y } map { [split] } keys %b );
+my %b = map { $_->[3] == $Y ? ($_->[2]=>1) : () } @rows;
+my($l,$n) = (-1e9, -%b);
 
 ## Count included squares... (-# beacons);
 $_->[0] > $l ? ($n+=$_->[1]-$_->[0]+1,$l=$_->[1]) : $_->[1]>$l && ($n+=$_->[1]-$l,$l=$_->[1])  for
