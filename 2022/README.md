@@ -19,7 +19,7 @@
 | <sub>17</sub> | <sub>[`Pl`](pl/17.pl) [`Com`](nc/17.pl) [`In`](data/17.txt) [`Out`](out/17.txt) [`AOC`](https://adventofcode.com/2022/day/17)</sub> | <sub>[Pyroclastic flow](17.md)</sub> | <sub>647</sub> | <sub>0.032 523</sub> | <sub>0.190%</sub> | <sub>3 153</sub> | <sub>1 553 665 689 155</sub> |
 | <sub>18</sub> | <sub>[`Pl`](pl/18.pl) [`Com`](nc/18.pl) [`In`](data/18.txt) [`Out`](out/18.txt) [`AOC`](https://adventofcode.com/2022/day/18)</sub> | <sub>[Boiling boulders](18.md)</sub> | <sub>1 171</sub> | <sub>0.024 891</sub> | <sub>0.146%</sub> | <sub>4 370</sub> | <sub>2 458</sub> |
 | <sub>20</sub> | <sub>[`Pl`](pl/20.pl) [`Com`](nc/20.pl) [`In`](data/20.txt) [`Out`](out/20.txt) [`AOC`](https://adventofcode.com/2022/day/20)</sub> | <sub>[Grove positioning system](20.md)</sub> | <sub>357</sub> | <sub>15.213 562</sub> | <sub>88.986%</sub> | <sub>4 914</sub> | <sub>7 973 051 839 072</sub> |
-| <sub>21</sub> | <sub>[`Pl`](pl/21.pl) [`Com`](nc/21.pl) [`In`](data/21.txt) [`Out`](out/21.txt) [`AOC`](https://adventofcode.com/2022/day/21)</sub> | <sub>[Monkey math](21.md)</sub> | <sub>622</sub> | <sub>0.008 109</sub> | <sub>0.047%</sub> | <sub>168 502 451 381 566</sub> | <sub>3 343 167 719 435</sub> |
+| <sub>21</sub> | <sub>[`Pl`](pl/21.pl) [`Com`](nc/21.pl) [`In`](data/21.txt) [`Out`](out/21.txt) [`AOC`](https://adventofcode.com/2022/day/21)</sub> | <sub>[Monkey math](21.md)</sub> | <sub>608</sub> | <sub>0.008 109</sub> | <sub>0.047%</sub> | <sub>168 502 451 381 566</sub> | <sub>3 343 167 719 435</sub> |
 |  |  |  |  |  |  |  |  |
-| <sub>**TOTAL**</sub> |  |  | <sub>**9 377**</sub> | <sub>**17.096 509**</sub> |  |  |  |
-| <sub>***Mean***</sub> |  |  | <sub>***468.9***</sub> | <sub>***0.854 825***</sub> |  |  |  |
+| <sub>**TOTAL**</sub> |  |  | <sub>**9 363**</sub> | <sub>**17.096 509**</sub> |  |  |  |
+| <sub>***Mean***</sub> |  |  | <sub>***468.2***</sub> | <sub>***0.854 825***</sub> |  |  |  |
