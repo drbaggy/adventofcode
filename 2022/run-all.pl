@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl
+use feature qw(say);
 
 my @names = map { ucfirst lc $_ } (
   '-pad-',
@@ -20,6 +21,9 @@ my @names = map { ucfirst lc $_ } (
   'Proboscidea Volcanium',
   'Pyroclastic flow',
   'Boiling boulders',
+  '',
+  'Grove Positioning System',
+  'Monkey Math',
 );
 use strict;
 use Time::HiRes qw(time);
@@ -31,7 +35,8 @@ my $T = 0;
 my $N = 0;
 my $tot_time = 0;
 for ( 1 .. $#names ){
-  last unless -e sprintf 'data/%02d.txt', $_;
+  next if !$names[$_];
+  warn $_,' ',$names[$_];
   my $pd = sprintf 'YYYY%2d',$_;
   my $fn = sprintf '%02d',$_;
   $T += -s "nc/$fn.pl";
@@ -47,7 +52,7 @@ $tot_time += $_ for $out =~ m{Time\s*:\s*(\d+\.\d+)}g;
 $out =~ s{[\r\n]}{\t}g;
 $out =~ s{XXXX}{ |\n| }g;
 $out =~ s{YYYY}{}g;
-$out =~ s{Time\s*:\s*(\d\.\d+)}{my $x=$1;(sprintf('   %10.6f',$1)=~s/(...)$/ $1/r ).sprintf'    | %8.3f%%', $x*100/$tot_time }ge;
+$out =~ s{Time\s*:\s*(\d+\.\d+)}{my $x=$1;(sprintf('   %10.6f',$1)=~s/(...)$/ $1/r ).sprintf'    | %8.3f%%', $x*100/$tot_time }ge;
 $out =~ s{\t(\S+)}{" | ".fm($1)}ge;
 $out =~ s{\t}{}g;
 print join ( '','
