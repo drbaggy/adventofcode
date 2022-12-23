@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 use feature qw(say);
-use Time::HiRes qw(time);
+use Time::HiRes qw(time sleep);
 use Data::Dumper qw(Dumper);
 
-my($t,$Z,$moved,$n) = (0,100,1);
-
-my($f)= $0 =~ m{(\d+)[.]pl$}; die unless $f;
+# print "\033[2J"; ## Uncomment to watch action!!
+my($t,$Z,$moved,$n) = (0,60,1);
+my($f)= __FILE__ =~ m{(\d+)[.]pl$}; die unless $f;
 $Z = 10 if @ARGV;
 
 my $fn=__FILE__=~s/[^\/]*$//r.'../data/'.(@ARGV ? 't-'.$f : $f.'.txt');1while($fn=~s/[^\/]*\/\.\.\///);
@@ -60,6 +60,7 @@ while($moved) {
     ($M[$ny][$nx],$M[$y][$x]) = ('#','.');
     $V[$_]=[$nx,$ny];
   }
+  # print "\033[0;0f"; say @{$_} for @M; sleep 0.05; ## Uncomment to watch action
   if(++$t==10){ ## Get the bounding box at 10!
     my($r,$b,$l,$z)=(0,0,$W,$H);
     for(@V) {

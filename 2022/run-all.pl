@@ -1,7 +1,7 @@
 #!/usr/local/bin/perl
 use feature qw(say);
 
-my @names = map { ucfirst lc $_ } (
+my @names = (
   '-pad-',
   'Calorie counting',
   'Rock, paper, scissors',
@@ -21,14 +21,15 @@ my @names = map { ucfirst lc $_ } (
   'Proboscidea Volcanium',
   'Pyroclastic flow',
   'Boiling boulders',
-  'Not Enough Minerals',
+  'Not enough minerals',
   'Grove Positioning System',
-  'Monkey Math',
-  '',
-  'Unstable Diffusion',
-  '',
-  ''
+  'Monkey math',
+  '', ## 'Monkey map',
+  'Unstable diffusion',
+  '', ## 'Day 24'
+  '', ## 'Day 25'
 );
+
 use strict;
 use Time::HiRes qw(time);
 my $out;
@@ -39,8 +40,8 @@ my $T = 0;
 my $N = 0;
 my $tot_time = 0;
 for ( 1 .. $#names ){
+  warn $_,' -> "',$names[$_],'"';
   next if !$names[$_];
-  warn $_,' ',$names[$_];
   my $pd = sprintf 'YYYY%2d',$_;
   my $fn = sprintf '%02d',$_;
   $T += -s "nc/$fn.pl";
@@ -51,6 +52,7 @@ for ( 1 .. $#names ){
 
 select $std;
 close $o;
+open my $of, '>', 'of.txt'; print $of $out; close $of;
 $tot_time += $_ for $out =~ m{Time\s*:\s*(\d+\.\d+)}g;
 
 $out =~ s{\s*[\r\n]}{\t}g;
