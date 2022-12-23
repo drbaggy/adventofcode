@@ -14,7 +14,7 @@ my %fn = (
   '-' => [ sub { $_[0]-$_[1] }, sub { $_[0] + $_[1] }, sub { $_[1] - $_[0] } ],
   '/' => [ sub { $_[0]/$_[1] }, sub { $_[0] * $_[1] }, sub { $_[1] / $_[0] } ],
   '*' => [ sub { $_[0]*$_[1] }, sub { $_[0] / $_[1] }, sub { $_[0] / $_[1] } ],
-  'X' => [ sub { [] } ],
+  1   => [ sub { [] } ],
 );
 open my $fh,'<',$fn;
 my %p = map { chomp, my @t = split /(?:: | )/; $t[0],  @t>2 ? [@t[1..3]] : $t[1] } <$fh>;
@@ -25,11 +25,11 @@ $n = e( 'root' );
 ## Update the "HUMaN" mode so it is a reference which can't be resolved
 ## Update the "root" action to be "-" this is effectively the same as equal if we set
 ## the target to 0
-( $p{'humn'}, $p{'root'}[1] ) = ( [0,'X',0], '-'  );
+( $p{'humn'}, $p{'root'}[1] ) = ( [0..2], '-'  );
 my $z = e('root');
 
-( $t, $z )=( $fn{ $z->[1] }[ ref $z->[0] ? 1 : 2 ]( $t, $z->[ ref $z->[0] ? 2 : 0 ] ),
-             $z->[ ref $z->[0] ? 0 : 2 ]        ) while $z && @$z;
+( $t, $z )=( $fn{ $z->[1] }[ 1+!ref $z->[0] ]( $t, $z->[ 2*!ref $z->[2] ] ),
+             $z->[ 2*!ref $z->[0] ]        ) while $z && @$z;
 
 say "Time :", sprintf '%0.6f', time-$time;
 say "$n\n$t";

@@ -21,7 +21,7 @@ for ( [1,1] , [10,811589153] ) {
     for( 0..$#in ) {
       $p = 0; $p++ while $state[$p][0]!=$_;
       my $t = splice @state, $p, 1;
-      splice @state, ($in[$_]*$mult+$p)%($l-1), 0, $t;
+      splice @state, ($in[$_]*$m1+$p)%($l-1), 0, $t;
     }
   }
   $p = 0; $p++ while $state[$p][1];

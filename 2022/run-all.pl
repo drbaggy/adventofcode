@@ -21,9 +21,13 @@ my @names = map { ucfirst lc $_ } (
   'Proboscidea Volcanium',
   'Pyroclastic flow',
   'Boiling boulders',
-  '',
+  'Not Enough Minerals',
   'Grove Positioning System',
   'Monkey Math',
+  '',
+  'Unstable Diffusion',
+  '',
+  ''
 );
 use strict;
 use Time::HiRes qw(time);
@@ -49,21 +53,21 @@ select $std;
 close $o;
 $tot_time += $_ for $out =~ m{Time\s*:\s*(\d+\.\d+)}g;
 
-$out =~ s{[\r\n]}{\t}g;
+$out =~ s{\s*[\r\n]}{\t}g;
+$out =~ s{\t(\S+)}{" | ".fm($1)}ge;
 $out =~ s{XXXX}{ |\n| }g;
+$out =~ s{[|]\s*[|]$}{|}gmxs;
 $out =~ s{YYYY}{}g;
 $out =~ s{Time\s*:\s*(\d+\.\d+)}{my $x=$1;(sprintf('   %10.6f',$1)=~s/(...)$/ $1/r ).sprintf'    | %8.3f%%', $x*100/$tot_time }ge;
-$out =~ s{\t(\S+)}{" | ".fm($1)}ge;
 $out =~ s{\t}{}g;
 print join ( '','
 | Day         | Files                                                                                                                    | Name                                     | Size          | Time              |      %age | Answer 1             | Answer 2             |
 | ----------- | :----------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | ------------: | ----------------: | --------: | -------------------: | -------------------:', $out,' |
 |             |                                                                                                                          |                                          |               |                   |           |                      |                      |
 | **TOTAL**   |                                                                                                                          |                                          |  ~~',sprintf('%6d',$T)=~s/(...)$/ $1/r,'**  |  ~~', sprintf( '%10.6f',$tot_time    )=~s/(...)$/ $1/r, '**  |           |                      |                      |
-|             |                                                                                                                          |                                          |               |                   |           |                      |                      |
 | ***Mean***  |                                                                                                                          |                                          | ~~~',sprintf('%7.1f',$T/$N),           '*** | ~~~', sprintf( '%10.6f',$tot_time/$N )=~s/(...)$/ $1/r, '*** |           |                      |                      |
 
-' ) =~ s{(\~\~\~?)(\s*)}{my $T=$2;$T.( ($1=~s/~/*/gr) )}ger;
+' ) =~ s{(\~\~\~?)(\s*)}{my $T=$2;$T.( ($1=~s/~/*/gr) )}ger =~ s/[|] /| <sub>/gr =~ s/ [|]/<\/sub> |/gr =~ s/(<sub>)( +)/\1/gr =~ s/( +)(<\/sub>)/\2/gr =~ s{<sub>([:-]*)</sub>}{$1}gr;
 
 sub fm {
   my $x = $_[0];
