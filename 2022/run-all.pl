@@ -7,6 +7,7 @@ my @names = (
   'Rock, paper, scissors',
   'Rucksack reorganization',
   'Camp cleanup',
+#); my @QQQ = (
   'Supply stacks',
   'Tuning trouble',
   'No space left on device',
@@ -66,7 +67,7 @@ print join ( '','
 | Day         | Files                                                                                                                    | Name                                     | Size          | Time              |      %age | Answer 1             | Answer 2             |
 | ----------- | :----------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | ------------: | ----------------: | --------: | -------------------: | -------------------:', $out,' |
 |             |                                                                                                                          |                                          |               |                   |           |                      |                      |
-| **TOTAL**   |                                                                                                                          |                                          |  ~~',sprintf('%6d',$T)=~s/(...)$/ $1/r,'**  |  ~~', sprintf( '%10.6f',$tot_time    )=~s/(...)$/ $1/r, '**  |           |                      |                      |
+| **TOTAL**   |                                                                                                                          | **',sprintf('%.3f',$T/1024),'KB**           |  ~~',sprintf('%6d',$T)=~s/(...)$/ $1/r,'**  |  ~~', sprintf( '%10.6f',$tot_time    )=~s/(...)$/ $1/r, '**  |           |                      |                      |
 | ***Mean***  |                                                                                                                          |                                          | ~~~',sprintf('%7.1f',$T/$N),           '*** | ~~~', sprintf( '%10.6f',$tot_time/$N )=~s/(...)$/ $1/r, '*** |           |                      |                      |
 
 ' ) =~ s{(\~\~\~?)(\s*)}{my $T=$2;$T.( ($1=~s/~/*/gr) )}ger =~ s/[|] /| <sub>/gr =~ s/ [|]/<\/sub> |/gr =~ s/(<sub>)( +)/\1/gr =~ s/( +)(<\/sub>)/\2/gr =~ s{<sub>([:-]*)</sub>}{$1}gr;

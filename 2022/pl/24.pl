@@ -43,17 +43,13 @@ for my $y (1..$H) {
 
 while(my $e = shift @q) {
   my($y,$x,$T,$flag) = @{$e};
-  my $i = ($T+1)%$R;
-  if( $y>$H+1 ) {
-    $n||=$T,$flag=1 if $flag == 0;
-    $t=$T,last      if $flag == 2;
-  } elsif($y<2 && $flag == 1 ) {
-    $flag = 2
+  next if $cache{ join '-',$y,$x,(my $i=($T+1)%$R),$flag }++;
+  if($y<2 ) {
+    $flag = 2 if $flag == 1
+  } elsif( $y>$H+1 && $flag != 1) {
+    $flag?($t=$T,last):($n||=$T,$flag=1)
   }
-  next if $cache{ "$y-$x-$T-$flag" }++;
-  for(@d) {
-    push @q,[$y+$_->[0],$x+$_->[1],$T+1,$flag] unless $G[$i][$y+$_->[0]][$x+$_->[1]]
-  }
+  $G[$i][$y+$_->[0]][$x+$_->[1]] || push @q,[$y+$_->[0],$x+$_->[1],$T+1,$flag] for @d
 }
 
 say "Time :", sprintf '%0.6f', time-$time;
