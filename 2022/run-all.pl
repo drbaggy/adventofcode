@@ -18,7 +18,7 @@ my @names = (
   'Distress signal',
   'Regolith reservoir',
   'Beacon exclusion zone',
-  'Proboscidea Volcanium',
+  '*Proboscidea Volcanium*',
   'Pyroclastic flow',
   'Boiling boulders',
   'Not enough minerals',
@@ -26,7 +26,7 @@ my @names = (
   'Monkey math',
   '', ## 'Monkey map',
   'Unstable diffusion',
-  '', ## 'Day 24'
+  'Blizzard basin',
   '', ## 'Day 25'
 );
 
