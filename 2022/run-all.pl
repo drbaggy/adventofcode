@@ -6,8 +6,8 @@ my @names = (
   'Calorie counting',
   'Rock, paper, scissors',
   'Rucksack reorganization',
-  'Camp cleanup',
 #); my @QQQ = (
+  'Camp cleanup',
   'Supply stacks',
   'Tuning trouble',
   'No space left on device',
@@ -28,56 +28,47 @@ my @names = (
   'Monkey map',
   'Unstable diffusion',
   'Blizzard basin',
-  '', ## 'Day 25'
+  'Full of hot air',
 );
 
 use strict;
 use Time::HiRes qw(time);
 my $out;
-open my $o, '>', \$out;
-my $std = select $o;
 my $t0 =time;
 my $T = 0;
 my $N = 0;
-my $tot_time = 0;
-for ( 1 .. $#names ){
-  warn $_,' -> "',$names[$_],'"';
-  next if !$names[$_];
-  my $pd = sprintf 'YYYY%2d',$_;
-  my $fn = sprintf '%02d',$_;
-  $T += -s "nc/$fn.pl";
-  $N ++;
-  print "XXXX     $pd     | [`Pl`](pl/$fn.pl) [`Com`](nc/$fn.pl) [`In`](data/$fn.txt) [`Out`](out/$fn.txt) [`AOC`](https://adventofcode.com/2022/day/$_)".($_<10?' ':'').' | ',sprintf('%-40s',sprintf'[%s](%02d.md)',$names[$_],$_ ),' |    ',sprintf('%6d',-s "nc/$fn.pl")=~s{(...)$}{ $1}r,"    | ";
-   do "./pl/$fn.pl";
-}
+my $C = 0;
+my @T;
+my $OUT = '
+| Day | Files | Name | Size | Time | %age | Answer 1 | Answer 2 |
+| --: | :-- | :-- | --: | --: | --: | --: | --: |';
 
-select $std;
-close $o;
-open my $of, '>', 'of.txt'; print $of $out; close $of;
-$tot_time += $_ for $out =~ m{Time\s*:\s*(\d+\.\d+)}g;
-
-$out =~ s{\s*[\r\n]}{\t}g;
-$out =~ s{\t(\S+)}{" | ".fm($1)}ge;
-$out =~ s{XXXX}{ |\n| }g;
-$out =~ s{[|]\s*[|]$}{|}gmxs;
-$out =~ s{YYYY}{}g;
-$out =~ s{Time\s*:\s*(\d+\.\d+)}{my $x=$1;(sprintf('   %10.6f',$1)=~s/(...)$/ $1/r ).sprintf'    | %8.3f%%', $x*100/$tot_time }ge;
-$out =~ s{\t}{}g;
-print join ( '','
-| Day         | Files                                                                                                                    | Name                                     | Size          | Time              |      %age | Answer 1             | Answer 2             |
-| ----------- | :----------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | ------------: | ----------------: | --------: | -------------------: | -------------------:', $out,' |
-|             |                                                                                                                          |                                          |               |                   |           |                      |                      |
-| **TOTAL**   |                                                                                                                          | **',sprintf('%.3f',$T/1024),'KB**           |  ~~',sprintf('%6d',$T)=~s/(...)$/ $1/r,'**  |  ~~', sprintf( '%10.6f',$tot_time    )=~s/(...)$/ $1/r, '**  |           |                      |                      |
-| ***Mean***  |                                                                                                                          |                                          | ~~~',sprintf('%7.1f',$T/$N),           '*** | ~~~', sprintf( '%10.6f',$tot_time/$N )=~s/(...)$/ $1/r, '*** |           |                      |                      |
-
-' ) =~ s{(\~\~\~?)(\s*)}{my $T=$2;$T.( ($1=~s/~/*/gr) )}ger =~ s/[|] /| <sub>/gr =~ s/ [|]/<\/sub> |/gr =~ s/(<sub>)( +)/\1/gr =~ s/( +)(<\/sub>)/\2/gr =~ s{<sub>([:-]*)</sub>}{$1}gr;
-
-sub fm {
-  my $x = $_[0];
-  unless( $x=~m{\D}) {
-    $x = reverse $x;
-    $x =~ s{(...)}{$1 }g;
-    $x = reverse $x;
+for my $dn ( 1 .. $#names ){
+  my ($t,$m,$n,$tt)=1e6;
+  my $fn = sprintf '%02d', $dn;
+  for my $l (0..49) {
+    my $out = `perl pl/$fn.pl`;
+    ($tt,$m,$n) = split/ /, $out =~ s{Time\s*:}{}r =~ s{\s+}{ }gr;
+    $t=$tt if $tt<$t;
   }
-  sprintf '%20s',$x;
+  my $b = -s "nc/$fn.pl";
+  $T+=$t;
+  $N+=$b;
+  $C++;
+  push @T,[ $fn, $names[$dn], $b, $t, $m, $n, $dn ];
+  warn "$dn: $names[$dn] $t, $T, ",time-$t0;
 }
+foreach (@T) {
+  $OUT .= join '',"\n| $_->[6] | [`Pl`](pl/$_->[0].pl) [`Com`](nc/$_->[0].pl) [`In`](data/$_->[0].txt) [`Out`](out/$_->[0].txt) [`AOC`](https://adventofcode.com/2022/day/$_->[6]) | [$_->[1]]($_->[0].md) | ",
+    $_->[2] =~ s{(...)$}{ $1}r," | ", sprintf('%0.6f',$_->[3]) =~ s/(...)$/ $1/r, ' | ',sprintf( '%0.3f', $_->[3]/$T*100 ),'% | ',com( $_->[4]),' | ', com( $_->[5] ),' |';
+}
+
+sub com { my $x = $_[0]; unless( $x=~m{\D}) { $x = reverse $x; $x =~ s{(...)}{$1 }g; $x = reverse $x; } $x }
+
+$OUT .= join '', '
+| | | | | | | | |
+| **TOTAL** | | **',sprintf('%0.3f',$N/1024),'KB** | **',sprintf('%d',$N)=~s/(...)$/ $1/r=~s/^ //r,'** | **', sprintf( '%0.6f',$T    )=~s/(...)$/ $1/r, '** | | | |
+| ***Mean*** | | | ***',sprintf('%0.1f',$N/$C),'*** | ***', sprintf( '%0.6f',$T/$C )=~s/(...)$/ $1/r, '*** | | | |
+';
+say $OUT =~ s/\| +/| <sub>/gr =~ s/ +\|/<\/sub> |/gr =~ s/<sub>\|/|/gr =~ s/<sub>([:-]+)<\/sub>/$1/gr
+
