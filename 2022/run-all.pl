@@ -25,7 +25,7 @@ my @names = (
   'Not enough minerals',
   'Grove Positioning System',
   'Monkey math',
-  '', ## 'Monkey map',
+  'Monkey map',
   'Unstable diffusion',
   'Blizzard basin',
   '', ## 'Day 25'
