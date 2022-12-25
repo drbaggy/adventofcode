@@ -1,6 +1,6 @@
 
 | <sub>Day</sub> | <sub>Files</sub> | <sub>Name</sub> | <sub>Size</sub> | <sub>Time</sub> | <sub>%age</sub> | <sub>Answer 1</sub> | <sub>Answer 2</sub> |
-| -- | :-- | :-- | --: | --: | --: | --: | --: |
+| --: | :-- | :-- | --: | --: | --: | --: | --: |
 | <sub>1</sub> | <sub>[`Pl`](pl/01.pl) [`Com`](nc/01.pl) [`In`](data/01.txt) [`Out`](out/01.txt) [`AOC`](https://adventofcode.com/2022/day/ARRAY(0x55acc1c4e3e0))</sub> | <sub>[Calorie counting]</sub> | <sub>99</sub> | <sub>0.002138</sub> | <sub>0.003%</sub> | <sub>66 487</sub> | <sub>197 301</sub> |
 | <sub>2</sub> | <sub>[`Pl`](pl/02.pl) [`Com`](nc/02.pl) [`In`](data/02.txt) [`Out`](out/02.txt) [`AOC`](https://adventofcode.com/2022/day/ARRAY(0x55acc1cc75f8))</sub> | <sub>[Rock, paper, scissors]</sub> | <sub>181</sub> | <sub>0.002210</sub> | <sub>0.003%</sub> | <sub>14 827</sub> | <sub>13 889</sub> |
 | <sub>3</sub> | <sub>[`Pl`](pl/03.pl) [`Com`](nc/03.pl) [`In`](data/03.txt) [`Out`](out/03.txt) [`AOC`](https://adventofcode.com/2022/day/ARRAY(0x55acc1d4f4e8))</sub> | <sub>[Rucksack reorganization]</sub> | <sub>328</sub> | <sub>0.008664</sub> | <sub>0.013%</sub> | <sub>8 243</sub> | <sub>2 631</sub> |
