@@ -1,24 +1,32 @@
-use Data::Dumper qw(Dumper);
-my(@dir,@R)=([1,0]);push@dir,[-$dir[-1][1],$dir[-1][0]]for 1..3;
-my@in=map{chomp;$_}<>;my@P=split/([LR])/,pop@in;pop@in;
-my$W=0;length$_>$W&&($W=length$_)for@in;
-my$H=(my@M=([(' ')x($W+2)],map({[@{[' ',(split//),(' ')x$W]}[0..($W+1)]]}@in),[(' ')x($W+2)]))-2;
-my$Z=$H*3==$W*4?$W/3:$H*4==$W*3?$H/3:$H*5==$W*2?$W/5:$H/5;
-my(@J,@C,@mx_x,@mx_y,@mn_x,@mn_y);
-for my$r(1..$H){for my$c(1..$W){next if$M[$r][$c]eq' ';
-$mx_x[$r]=$c;$mn_x[$r]||=$c;$mx_y[$c]=$r;$mn_y[$c]||=$r}}
-my@cj=([undef,[undef,undef,[2,0,0],[3,0,0]],[[2,1,2],[1,1,2],undef,[3,0,3]]],
-[undef,[[0,2,3],undef,[2,0,1],undef],undef],
-[[undef,undef,[0,1,0],[1,1,0]],[[0,2,2],[3,0,2],undef,undef],undef],
-[[[2,1,3],[0,2,1],[0,1,1],undef],undef,undef]);
-for my$r(1..$H){my$fr=int(($r-1)/$Z);for my$c(1..$W){next unless$M[$r][$c]eq'.';
-my$fc=int(($c-1)/$Z);for my$d(0..3){next if$M[$r+$dir[$d][1]][$c+$dir[$d][0]]ne' ';
-my$dest=$d==0?[$r,$mn_x[$r],$d]:$d==1?[$mn_y[$c],$c,$d]:$d==2?[$r,$mx_x[$r],$d]:$d==3?[$mx_y[$c],$c,$d]:-1;
-$J[$d]{$c}{$r}=$M[$dest->[0]][$dest->[1]]eq'#'?undef:$dest;
-my($dr,$dc,$dd)=@{$cj[$fr][$fc][$d]};my$pos=$d==0?$r-$fr*$Z-1:$d==1?($fc+1)*$Z-$c:$d==2?($fr+1)*$Z-$r:$c-$fc*$Z-1;
-my($nr,$nc)=$dd==0?($dr*$Z+1+$pos,$dc*$Z+1):$dd==1?($dr*$Z+1,($dc+1)*$Z-$pos):$dd==2?(($dr+1)*$Z-$pos,($dc+1)*$Z):(($dr+1)*$Z,$dc*$Z+1+$pos);
-$C[$d]{$c}{$r}=$M[$nr][$nc]eq'#'?undef:[$nr,$nc,$dd,$pos]}}}
-for my$K(\@J,\@C){my($r,$c,$d)=(1,$mn_x[1],0);for(@P){'R'eq$_?($d++,$d%=4):'L'eq$_?($d--,$d%=4):
-map{exists$K->[$d]{$c}{$r}?defined$K->[$d]{$c}{$r}?($r,$c,$d)=@{$K->[$d]{$c}{$r}}:next:$M[$r+$dir[$d][1]][$c+$dir[$d][0]]eq'.'?($r+=$dir[$d][1],$c+=$dir[$d][0]):next}1..$_}
-push@R,$r*1000+$c*4+$d}
-say for@R;
+my($Z,@D,@R,$S,$d,$t,@J,@C,@p,@q,@r,@s)=(0,[1,0],[0,1],[-1,0],[0,-1]);my@I=map{chomp;$_}<>;my@P=split/([LR])/,pop@I;pop@I;
+my($w,@G)=(0,[0,1],[1,2],[2,3],[3,0],[1,0],[0,3],[3,2],[2,1]);length$_>$w&&($w=length$_)for@I;
+my$h=(my@M=([(' ')x($w+2)],map({[@{[' ',(split//),(' ')x$w]}[0..$w+1]]}@I),[(' ')x($w+2)]))-2;
+($h*$_->[0]==$w*$_->[1])&&($S=$w/$_->[0])for[3,4],[4,3],[2,5],[5,2];
+my$H=$h/$S;my$W=$w/$S;my@N=map{//;[map{$M[1+$'*$S][1+$_*$S]eq' '?0:1}0..$W]}0..$H;map{$Z+=$_}@{$_}for@N;
+for$t(1..$h){for(1..$w){next if' 'eq$M[$t][$_];$p[$t]=$_;$r[$t]||=$_;$q[$_]=$t;$s[$_]||=$t}}
+my@K=j();for$t(1..$h){my$r=int(($t-1)/$S);for(1..$w){next if'.'ne$M[$t][$_];my$c=int(($_-1)/$S);
+for$d(0..3){next if$M[$t+$D[$d][1]][$_+$D[$d][0]]ne' ';my$q=$d==0?[$t,$r[$t],$d]:$d==1?[$s[$_],$_,$d]:$d==2?[$t,$p[$t],$d]:$d==3?[$q[$_],$_,$d]:-1;
+$J[$d]{$_}{$t}=$M[$q->[0]][$q->[1]]eq'#'?undef:$q;my($j,$k,$l)=@{$K[$r][$c][$d]};my$P=$d==0?$t-$r*$S-1:$d==1?($c+1)*$S-$_:$d==2?($r+1)*$S-$t:$_-$c*$S-1;
+my($p,$z)=$l==0?($j*$S+1+$P,$k*$S+1):$l==1?($j*$S+1,($k+1)*$S-$P):$l==2?(($j+1)*$S-$P,($k+1)*$S):(($j+1)*$S,$k*$S+1+$P);
+$C[$d]{$_}{$t}=$M[$p][$z]eq'#'?undef:[$p,$z,$l,$P]}}}
+for$t(\@J,\@C){my($r,$c,$d)=(1,$r[1],0);for(@P){'R'eq$_?($d++,$d%=4):'L'eq$_?($d--,$d%=4):map{exists$t->[$d]{$c}{$r}?
+defined$t->[$d]{$c}{$r}?($r,$c,$d)=@{$t->[$d]{$c}{$r}}:next:$M[$r+$D[$d][1]][$c+$D[$d][0]]eq'.'?($r+=$D[$d][1],$c+=$D[$d][0]):next}1..$_}say$r*1e3+$c*4+$d}
+sub j{my($z,$f,$c,$x,$v,@V,@Z,$d,$e)=({},0,1,0,12,map{[map{$_?[qw(. . . .)]:[]}@{$_}]}@N);if($H>1){O:for(0..$H-2){for$x(0..$W){
+($f,$V[$_][$x],$V[$_+1][$x],$V[$_+2][$x])=(1,[qw(A B D C)],[qw(C D F E)],[qw(E F H G)]),last O if$N[$_][$x]&&$N[$_+1][$x]&&$N[$_+2][$x]}}}
+if($W>1&&!$f){P:for$x(0..$W-2){for(0..$H){
+($f,$V[$_][$x],$V[$_][$x+1],$V[$_][$x+2])=(1,[qw(A B F E)],[qw(B C G F)],[qw(C D H G)]),last P if$N[$_][$x]&&$N[$_][$x+1]&&$N[$_][$x+2]}}}
+if($H&&$W&&!$f){R:for$x(0..$W-1){for(1..$H-1){if($N[$_][$x]&&$N[$_][$x+1]){
+($f,$v,$V[$_-1][$x+1],$V[$_][$x],$V[$_][$x+1],$V[$_+1][$x])=(1,8,[qw(A G C B)],[qw(A B E D)],[qw(B C F E)],[qw(D E F H)]),last R if$N[$_-1][$x+1]&&$N[$_+1][$x];
+($f,$v,$V[$_-1][$x],$V[$_][$x],$V[$_][$x+1],$V[$_+1][$x+1])=(1,8,[qw(G C B A)],[qw(A B E D)],[qw(B C F E)],[qw(E F H D)]),last R if$N[$_-1][$x]&&$N[$_+1][$x+1]}}}}
+while($c&&$v){$c=0;for$x(0..$W){for(1..$H){$N[$_-1][$x]&&$N[$_][$x]||next;
+$c++,$V[$_-1][$x][3]=$V[$_][$x][0]if$V[$_][$x][0]ne'.'&&$V[$_-1][$x][3]eq'.';$c++,$V[$_][$x][0]=$V[$_-1][$x][3]if$V[$_-1][$x][3]ne'.'&&$V[$_][$x][0]eq'.';
+$c++,$V[$_-1][$x][2]=$V[$_][$x][1]if$V[$_][$x][1]ne'.'&&$V[$_-1][$x][2]eq'.';$c++,$V[$_][$x][1]=$V[$_-1][$x][2]if$V[$_-1][$x][2]ne'.'&&$V[$_][$x][1]eq'.'}}
+for$x(1..$W){for(0..$H){$N[$_][$x-1]&&$N[$_][$x]||next;
+$c++,$V[$_][$x-1][1]=$V[$_][$x][0]if$V[$_][$x][0]ne'.'&&$V[$_][$x-1][1]eq'.';$c++,$V[$_][$x][0]=$V[$_][$x-1][1]if$V[$_][$x-1][1]ne'.'&&$V[$_][$x][0]eq'.';
+$c++,$V[$_][$x-1][2]=$V[$_][$x][3]if$V[$_][$x][3]ne'.'&&$V[$_][$x-1][2]eq'.';$c++,$V[$_][$x][3]=$V[$_][$x-1][2]if$V[$_][$x-1][2]ne'.'&&$V[$_][$x][3]eq'.'}}
+for$x(0..$W){for(0..$H){$N[$_][$x]||next;for$d(@G){if($V[$_][$x][$d->[0]]ne'.'&&$V[$_][$x][$d->[1]]eq'.'){my$F=$V[$_][$x][$d->[0]];my%f;
+for my$p(0..$W){for my$q(0..$H){$N[$q][$p]||next;for$e(@G){$f{$V[$q][$p][$e->[1]]}++if$V[$q][$p][$e->[0]]eq$F}}}
+delete$f{'.'};my$z="@{[sort values%f]}";if('1 2 2'eq$z){my($T)=grep{$f{$_}==1}keys%f;$V[$_][$x][$d->[1]]=$T;$c++}}}}}$v-=$c}
+for$x(0..$W){for$e(0..$H){$N[$e][$x]||next;for$d(0..3){push@{$z->{"@{[sort$V[$e][$x][(1+$d)%4],$V[$e][$x][(2+$d)%4]]}"}},[$e,$x,$d]}}}
+for$x(0..$W){for$e(0..$H){$Z[$e][$x]=undef,next if!$N[$e][$x];for$d(0..3){$Z[$e][$x][$d]=[$_->[0],$_->[1],($_->[2]-2)%4]for grep{$e!=$_->[0]&&$x!=$_->[1]}
+@{$z->{"@{[sort$V[$e][$x][(1+$d)%4],$V[$e][$x][(2+$d)%4]]}"}}}}}@Z}

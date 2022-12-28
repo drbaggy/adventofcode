@@ -4,8 +4,8 @@ use feature qw(say);
 use Time::HiRes qw(time);
 use Data::Dumper qw(Dumper);
 
-#my($t,$n,$c,$f,$p,@res)=(1,0,0,'t-19');
-my($t,$n,$c,$f,$p,@res)=(1,0,0,'19.txt');
+my($t,$n,$c,$f,$p,@res)=(1,0,0,'t-19');
+#my($t,$n,$c,$f,$p,@res)=(1,0,0,'19.txt');
 
 my $fn=__FILE__=~s/[^\/]*$//r.'../data/'.$f;1while($fn=~s/[^\/]*\/\.\.\///);
 my $time = time;
@@ -14,8 +14,10 @@ open my $fh,'<',$fn;
 my @bps=map{[m{\d+.*?(\d+).*?(\d+).*?(\d+).*?(\d+).*?(\d+).*?(\d+)}]}<$fh>;
 close$fh;
 
+for(0..9) {$c=0;
 $n += P->new($_,24)->walk * ++$c for @bps;
-$t *= P->new($_,32)->walk        for @bps[0,1,2];
+}
+#$t *= P->new($_,32)->walk        for @bps[0,1,2];
 
 say"Time:",sprintf'%0.6f',time-$time;
 say"$n\n$t";
