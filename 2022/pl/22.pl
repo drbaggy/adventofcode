@@ -22,15 +22,13 @@ map{$Z+=$_}@{$_}for@N;die'Nets must have 6 faces'unless$Z==6;
 ## Find the boundary points - we can use this for the toroidal calculation....
 for$t(1..$h){for(1..$w){next if' 'eq$M[$t][$_];$p[$t]=$_;$r[$t]||=$_;$q[$_]=$t;$s[$_]||=$t}}
 my@K=j();
-say "XX",@{$_} for @M;
 ## Generate jump maps for the two "folds" of the map - when you jum off into space where do you go...
 ## @J is for the toroidal map - and just rotates to the other side
 ## @C is for the cube map - and requires a fold map is generated {hand crafted above}
 
 for$t(1..$h){my$r=int(($t-1)/$S);
   for(1..$w){next unless'.'eq$M[$t][$_];my$c=int(($_-1)/$S);
-    for$d(0..3){warn "$d @{$D[$d]}";warn "(",$M[ $t+$D[$d][1]][$_+$D[$d][0]],")";next if$M[ $t+$D[$d][1]][$_+$D[$d][0]]ne' ';
-warn"$t,$_,$d|$r,$c|";
+    for$d(0..3){next if$M[ $t+$D[$d][1]][$_+$D[$d][0]]ne' ';
       my$q=$d==0?[$t,$r[$t],$d]:$d==1?[$s[$_],$_,$d]:$d==2?[$t,$p[$t],$d]:$d==3?[$q[$_],$_,$d]:-1;
       $J[$d]{$_}{$t}=$M[$q->[0]][$q->[1]] eq '#' ? undef : $q;
 ## Cubic map
@@ -51,13 +49,15 @@ for(@P){'R'eq$_?($d++,$d%=4):'L'eq$_?($d--,$d%=4):map{exists$t->[$d]{$c}{$r}?
 say"Time :",sprintf'%0.6f',time-$time;say for@R;
 
 sub n{my($p,$q)=@_;for my$y(0..$H){
-  say join'',map{($p->[$y][$_]?($q->[$y][$_][0]//'X').'--'.($q->[$y][$_][1]//'X'):'')}0..$W;
-  say join'',map{($p->[$y][$_]?'||':'')}0..$W;
-  say join'',map{($p->[$y][$_]?($q->[$y][$_][3]//'X').'--'.($q->[$y][$_][2]//'X'):'')}0..$W
+  say join'',map{($p->[$y][$_]?($q->[$y][$_][0]//'X').'--'.($q->[$y][$_][1]//'X'):'    ')}0..$W;
+  say join'',map{($p->[$y][$_]?'|  |':'    ')}0..$W;
+  say join'',map{($p->[$y][$_]?($q->[$y][$_][3]//'X').'--'.($q->[$y][$_][2]//'X'):'    ')}0..$W
 }say''}
 
 sub j{
+  n(\@N,[]);
   my($z,$f,$c,$x,$v,@V,@Z,$d,$e)=({},0,1,0,12,map{[map{$_?[qw(. . . .)]:[]}@{$_}]}@N);
+  n(\@N,\@V);
   if($H>1){O:for(0..$H-2){for$x(0..$W){
     ($f,$V[$_][$x],$V[$_+1][$x],$V[$_+2][$x])=(1,[qw(A B D C)],[qw(C D F E)],[qw(E F H G)]),last O if $N[$_][$x] && $N[$_+1][$x] && $N[$_+2][$x]}}}
   if($W>1&&!$f){P:for$x(0..$W-2){for(0..$H){
@@ -90,7 +90,7 @@ sub j{
   for$x(0..$W){for$e(0..$H){$Z[$e][$x]=undef,next unless$N[$e][$x];for$d(0..3){
     $Z[$e][$x][$d]=[$_->[0],$_->[1],($_->[2]-2)%4]for grep{$e!=$_->[0]&&$x!=$_->[1]}
     @{$z->{"@{[sort$V[$e][$x][(1+$d)%4],$V[$e][$x][(2+$d)%4]]}"}}}}}
-print Dumper(\@Z);
+  n(\@N,\@V);
   return @Z;
 }
 
