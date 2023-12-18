@@ -1,5 +1,5 @@
 echo ''
-echo '                   Part 1           Part 2            Time'
+echo '                  Part 1           Part 2            Time'
 echo ''
 start=`date +%s%6N`
 RUNNING=0;
