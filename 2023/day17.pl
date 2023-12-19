@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use feature qw(say);
 use Time::HiRes qw(time);
-use Data::Dumper qw(Dumper);
+#use Data::Dumper qw(Dumper);
 
 my($t0,$t1,$t2)=(time,0,0);
 
