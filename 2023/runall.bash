@@ -3,7 +3,7 @@ echo '                  Part 1           Part 2            Time'
 echo ''
 start=`date +%s%6N`
 RUNNING=0;
-for i in {1..24}
+for i in {1..25}
 do
   if [ -f "day$i.pl" ]
   then
